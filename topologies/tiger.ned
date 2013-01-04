@@ -1,0 +1,86 @@
+package topologies;
+import modules.*;
+
+network tiger_network {
+
+    parameters:
+    	int n = 22;
+	double degree = default(4);
+
+	int c = default(8);
+
+    submodules:
+	routing: routing{
+	}
+ 	
+	request_generator[c]: request_generator{
+	        @display("i=block/routing");
+	    
+	}
+
+	global_generator: global_generator{
+	        @display("i=block/routing");
+	    
+	}
+
+    	content_distribution: content_distribution{
+	    parameters:
+		repository_num =  default(1);
+	
+	}
+
+        ccn_node[n]: ccn_node{
+            parameters:
+	        @display("i=block/broadcast_s;is=s");
+            //    @display("p=50,50,ri,200,200");
+        }
+
+ 	statistics: statistics{
+
+	}
+
+
+
+connections allowunconnected:
+	ccn_node[0].face++ <--> { delay = 0.15ms; } <--> ccn_node[11].face++;
+	ccn_node[0].face++ <--> { delay = 0.30ms; } <--> ccn_node[12].face++;
+	ccn_node[0].face++ <--> { delay = 0.17ms; } <--> ccn_node[18].face++;
+	ccn_node[0].face++ <--> { delay = 0.13ms; } <--> ccn_node[19].face++;
+	ccn_node[1].face++ <--> { delay = 0.15ms; } <--> ccn_node[10].face++;
+	ccn_node[1].face++ <--> { delay = 0.30ms; } <--> ccn_node[2].face++;
+	ccn_node[1].face++ <--> { delay = 0.18ms; } <--> ccn_node[8].face++;
+	ccn_node[10].face++ <--> { delay = 0.027ms; } <--> ccn_node[11].face++;
+	ccn_node[11].face++ <--> { delay = 0.027ms; } <--> ccn_node[12].face++;
+	ccn_node[12].face++ <--> { delay = 0.023ms; } <--> ccn_node[13].face++;
+	ccn_node[13].face++ <--> { delay = 0.020ms; } <--> ccn_node[14].face++;
+	ccn_node[14].face++ <--> { delay = 0.04ms; } <--> ccn_node[15].face++;
+	ccn_node[15].face++ <--> { delay = 0.012ms; } <--> ccn_node[16].face++;
+	ccn_node[16].face++ <--> { delay = 0.012ms; } <--> ccn_node[17].face++;
+	ccn_node[17].face++ <--> { delay = 0.012ms; } <--> ccn_node[18].face++;
+	ccn_node[18].face++ <--> { delay = 0.023ms; } <--> ccn_node[19].face++;
+	ccn_node[18].face++ <--> { delay = 0.020ms; } <--> ccn_node[20].face++;
+	ccn_node[19].face++ <--> { delay = 0.027ms; } <--> ccn_node[20].face++;
+	ccn_node[19].face++ <--> { delay = 0.012ms; } <--> ccn_node[21].face++;
+	ccn_node[2].face++ <--> { delay = 0.3ms; } <--> ccn_node[12].face++;
+	ccn_node[2].face++ <--> { delay = 0.3ms; } <--> ccn_node[13].face++;
+	ccn_node[2].face++ <--> { delay = 0.2ms; } <--> ccn_node[3].face++;
+	ccn_node[3].face++ <--> { delay = 0.23ms; } <--> ccn_node[14].face++;
+	ccn_node[3].face++ <--> { delay = 0.23ms; } <--> ccn_node[15].face++;
+	ccn_node[3].face++ <--> { delay = 0.47ms; } <--> ccn_node[4].face++;
+	ccn_node[4].face++ <--> { delay = 0.33ms; } <--> ccn_node[16].face++;
+	ccn_node[4].face++ <--> { delay = 0.33ms; } <--> ccn_node[17].face++;
+	ccn_node[4].face++ <--> { delay = 0.4ms; } <--> ccn_node[5].face++;
+	ccn_node[5].face++ <--> { delay = 0.25ms; } <--> ccn_node[16].face++;
+	ccn_node[5].face++ <--> { delay = 0.25ms; } <--> ccn_node[17].face++;
+	ccn_node[5].face++ <--> { delay = 0.33ms; } <--> ccn_node[6].face++;
+	ccn_node[6].face++ <--> { delay = 0.18ms; } <--> ccn_node[16].face++;
+	ccn_node[6].face++ <--> { delay = 0.18ms; } <--> ccn_node[17].face++;
+	ccn_node[6].face++ <--> { delay = 0.27ms; } <--> ccn_node[7].face++;
+	ccn_node[7].face++ <--> { delay = 0.13ms; } <--> ccn_node[20].face++;
+	ccn_node[7].face++ <--> { delay = 0.33ms; } <--> ccn_node[8].face++;
+	ccn_node[8].face++ <--> { delay = 0.15ms; } <--> ccn_node[21].face++;
+	ccn_node[8].face++ <--> { delay = 0.15ms; } <--> ccn_node[9].face++;
+	ccn_node[9].face++ <--> { delay = 0.012ms; } <--> ccn_node[10].face++;
+	ccn_node[9].face++ <--> { delay = 0.012ms; } <--> ccn_node[21].face++;
+
+}

@@ -1,0 +1,14 @@
+	ccn_node[1].face++<-->{ delay = 5.48ms; }<-->ccn_node[0].face++;
+	ccn_node[2].face++<-->{ delay = 2.99ms; }<-->ccn_node[1].face++;
+	ccn_node[3].face++<-->{ delay = 2.43ms; }<-->ccn_node[2].face++;
+	ccn_node[4].face++<-->{ delay = 0.88ms; }<-->ccn_node[3].face++;
+	ccn_node[5].face++<-->{ delay = 3.82ms; }<-->ccn_node[4].face++;
+	ccn_node[6].face++<-->{ delay = 1.10ms; }<-->ccn_node[5].face++;
+	ccn_node[7].face++<-->{ delay = 2.30ms; }<-->ccn_node[3].face++;
+	ccn_node[7].face++<-->{ delay = 2.91ms; }<-->ccn_node[6].face++;
+	ccn_node[8].face++<-->{ delay = 3.48ms; }<-->ccn_node[2].face++;
+	ccn_node[8].face++<-->{ delay = 3.77ms; }<-->ccn_node[7].face++;
+	ccn_node[9].face++<-->{ delay = 7.36ms; }<-->ccn_node[8].face++;
+	ccn_node[10].face++<-->{ delay = 3.80ms; }<-->ccn_node[0].face++;
+	ccn_node[10].face++<-->{ delay = 5.02ms; }<-->ccn_node[1].face++;
+	ccn_node[10].face++<-->{ delay = 1.68ms; }<-->ccn_node[9].face++;

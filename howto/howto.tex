@@ -1,0 +1,119 @@
+\documentclass[10pt]{article}
+\usepackage{hyperref,verbatim}
+\usepackage[dvips]{graphicx}
+\author{Giuseppe Rossini, Dario Rossi, Raffaele Chiocchetti\\ ccnsim@lincs.fr}
+\date{\today}
+\title{ccnSim HOWTO}
+
+\newcommand{\ccnSim}[0]{ccnSim}
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+\begin{itemize}
+\item \ccnSim\ is a scalable chunk-level simulator of Content Centric Networks (CCN)\cite{ccn}, that we developed in the context of the \href{http://www.anr-connect.org/}{ANR Project Connect}. 
+
+\item \ccnSim\ is written in C++ under the \href{http://www.omnetpp.org/}{Omnet++ } framework, and allows to assess CCN performance in scenarios with large orders of magnitude for CCN content stores and Internet catalog sizes 
+
+\item On a PC equipped with 24GB of RAM, \ccnSim\ is able to simulate content stores up to $10^6$ chunks and catalog sizes up to $10^8$ files in a reasonable time.
+
+\item Is out of the scope of this document to provide a thorough description of CCN, Omnetpp or \ccnSim\ -- rather, its aim is to provide simple quick start instructions.
+
+\item We hope that you enjoy \ccnSim, in which case we ask you to please cite it as \cite{tr1}.
+\end{itemize}
+
+
+\section{Compiling ccnSim}
+
+ We assume that you have downloaded and installed Omnetpp (version 4.1) in your home directory. In order to run \ccnSim, it is first necessary to patch Omnetpp (in order to use the multi-path extension described in~\cite{tr1}), as follows:
+ 
+\begin{verbatim}
+    ccnSim@sushi:~$ unzip ccnSim-0.1.zip
+    ccnSim@sushi:~$ cp ccnSim-0.1/patch/ctopology.h  omnet4.1/include
+    ccnSim@sushi:~$ cp ccnSim-0.1/patch/ctopology.cc omnet4.1/src/sim
+    ccnSim@sushi:~$ cd ~/omnet4.1
+    ccnSim@sushi:~/omnet4.1$ make
+    ccnSim@sushi:~/omnet4.1$ cd ~/ccnSim-0.1
+    ccnSim@sushi:~/ccnSim-0.1$ opp_makemake -f --deep -X patch
+    ccnSim@sushi:~/ccnSim-0.1$ make    
+\end{verbatim}
+
+
+\begin{itemize}
+\item Note 1: the version 0.1 of ccnSim requires a 64bit kernel. We have successfully built and run ccnSim-0.1 with Ubuntu versions as old as 8.04 (provided that the parallelism is  architecture 64bits) and use a Linux  2.6.32 kernel on a Ubuntu 10.04LTS for our simulations. We have not tested 32bits architectures, nor will support them (see Note 2).
+\item Note 2: future versions of ccnSim (currently under testing) will remove the 64bits limitation by making use of the Boost libraries.
+\end{itemize}
+
+
+
+\section{Hello, (CCN) world!}
+Once you compiled the simulator, you're able to run your first CCN simulation.
+The syntax to invoke the simulator execution is the following:
+\begin{verbatim}
+     ccnSim@sushi:~/ccnSim-0.1$ ./ccnSim-0.1  -u Cmdenv  youtube.ini
+\end{verbatim}
+
+\noindent 
+To start, we provide a \verb!youtube.ini! settings file, that specify a VoD catalog as in \cite{tr1,tr2,nomen}.
+\verb!out0.node_local!\begin{itemize}
+\item Note 1:  In the above syntax, you can omit the configuration file name in case you store your settings in \verb!omnetpp.ini! rather than \verb!youtube.ini!. 
+\item Note 2:  The  \verb!youtube.ini!   file contains comments about the variables involved, to which we refer the reader for more detailed comments.
+\item Note 3:  For indication, running a 1800 seconds of simulated time of YouTube catalog on a Geant network (i.e., the default scenario in \verb!youtube.ini!)  takes about 2400 seconds of real time on an Intel Xeon E5620 @ 2.40GHz equipped with  12MB cache and 24GB ram.
+\end{itemize}
+
+\section{Simulation input}
+In omnetpp the scenario is described through ``ini'' files. We report here the example \verb!youtube.ini! shipped along with the simulator sources, containing detailed and hopefully useful comments to modify the scenario description.
+
+\verbatiminput{../youtube.ini}
+
+\section{Simulation output}
+
+Once you have run the simulation as in the previous paragraph, you will find the following statistics. Output is organized in a number of files, following an \verb!outID.extension! naming notation where \verb!ID! is the repetition number and \verb!extension! can be among the following:
+
+\noindent In file \verb!out0.sca!:
+\begin{itemize}
+\item DATA[$i$], INT[$i$]: number of data/interest messages handled by node $i$ during the simulation;
+\item hl[$i$]: chunk-level hit rate at different distances with respect to the request originator (i.e., tied with the distance at which the chunk has been found);
+\item stretch: normalized distance with respect to the server storing persistent replicas, see \cite{tr1,tr2}; 
+\item cache\_hit: average cache hit rate over all CCN nodes  (see \verb!out0.node_local! for individual hit rates);
+\item full\_time: time to fill all caches (i.e., after which the transient starts); 
+\item transient\_time: time at which the transient ends (and the steady state starts, that lasts for the amount of time specified in \verb!youtube.ini!);
+\item div\_ratio: cache diversity ratio (see \cite{tr1}).
+\end{itemize}
+
+\noindent In file \verb!out0.node_local!:
+\begin{itemize}
+\item List of repositories with cardinality (i.e., number of replicas)
+\item For each CCN node $i$ the correspondent final \verb!HitRate! achieved at the end of the simulation.
+\end{itemize}
+
+\noindent In file \verb!out0.node_stat!:
+\begin{itemize}
+\item For each file $k$ downloaded from node $i$, the log contains three values, namely $k$, the effort $\eta$ (see definition in \cite{tr2}) $i$.  
+\end{itemize}
+
+
+\noindent In file \verb!out0.vec!:
+\begin{itemize}
+\item If the convergence criterion of the simulation is the average global hit rate (see \verb!youtube.ini!),  this file reports the time evolution of the  average hit rate (0.1 second steps) until the stabilization.	
+\end{itemize}
+
+
+
+\section{Extending \ccnSim}
+
+As our main effort is devoted to \emph{extending} \ccnSim, please consider that we have limited effort to spend on its \emph{support} (e.g., manual, code comments, etc.), 
+
+Hence, you should consider \ccnSim\ is a ``PhD-grade'' simulator rather than a ``turnkey'' simulator. This means that (at least) MSc- (or better) PhD-grade skills may be necessary to run and modify the simulator, and inspection of the code may help over the lack of documentation (blame on us).
+
+For any questions, comments, suggestions, please use the \ccnSim\ mailing list  \verb!ccnsim@lincs.fr!  rather than our personal addresses.
+
+
+\bibliographystyle{plain}
+
+\bibliography{biblio}
+
+ 
+\end{document}
