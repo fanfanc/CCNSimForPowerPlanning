@@ -224,5 +224,9 @@ protected:
      *  */
     virtual void initialize();
     virtual void finish();
+
+private:
+    void recordSimTime();
 };
+
 #endif

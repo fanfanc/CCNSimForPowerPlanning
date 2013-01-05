@@ -295,6 +295,13 @@ void statistics::recordThroughput()
     }
 }
 
+void statistics::recordSimTime()
+{
+    char name[30];
+    sprintf(name, "Total Simulation Time : ");
+    recordScalar(name, simTime());
+}
+
 void statistics::finish()
 {
     recordScalar("div_ratio", div_cache.size() / tot_size);
@@ -311,4 +318,5 @@ void statistics::finish()
     }
 
     recordThroughput();
+    recordSimTime();
 }
