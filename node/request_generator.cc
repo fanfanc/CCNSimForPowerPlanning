@@ -97,8 +97,6 @@ vector<double> request_generator::cdfZipf(0);
 
 void request_generator::initialize()
 {
-    cout << "ddddddddddd" << endl;
-
     vector <string> ccn_types;
     cTopology topo;
 
@@ -116,14 +114,11 @@ void request_generator::initialize()
         cGate *g = topo.getNode(node)->getModule()->gate("reqPort");
         while (g->isConnected())
         {
-            cout << "d" << endl;
             node = intrand(N);
             g = topo.getNode(node)->getModule()->gate("reqPort");
         }
         gate("reqPort")->connectTo(g);
     }
-
-    cout << "sssssssssssssss" << endl;
 }
 
 

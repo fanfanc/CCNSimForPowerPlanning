@@ -7,7 +7,7 @@ network hierarchy_tree_network {
     	int n = 7;
 	double degree = default(4);
 
-	int c = 8;
+	int c = 4;
 
     submodules:
 	routing: routing{

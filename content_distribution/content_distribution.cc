@@ -160,7 +160,7 @@ void content_distribution::initialize()
     {
         catalog[f].repository =
             compose_random_vector(big_rep + f * replicas, replicas, repositories); //initialize that part of memory with a ranodom vector containing the repositories where is possible to find the file
-
+        cout << catalog[f].repository[0] << endl;
     }
 
     cout << "Content initialized" << endl;

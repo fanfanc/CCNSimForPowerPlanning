@@ -464,7 +464,7 @@ void ccn_node::handleMessage(cMessage *in)
 
         int_msg = (ccn_interest *) in;
 
-        int_msg->setHops(int_msg -> getHops() + 1);//beta^d to calculate the probability(adaptive all)
+        int_msg->setHops(int_msg->getHops() + 1);//beta^d to calculate the probability(adaptive all)
 
         manage_interest (int_msg);
         delete in;
@@ -476,9 +476,9 @@ void ccn_node::handleMessage(cMessage *in)
 
         data_msg = (ccn_data * ) in;
         //One hop more from the last caching node (useful for distance policy)
-        data_msg->setD(data_msg -> getD() + 1);
+        data_msg->setD(data_msg->getD() + 1);
         //On hop more from the origin of the node (useful for stretching metrics)
-        data_msg->setHops(data_msg -> getHops() + 1);
+        data_msg->setHops(data_msg->getHops() + 1);
 
         manage_data(data_msg);
 
@@ -900,9 +900,6 @@ void ccn_node::sendSinglePath(uint32_t *who_has, uint64_t chunk )
     outif = interest->popPath();
     send(interest, "face$o", outif);
 }
-
-
-
 
 //Compose an interest packet
 ccn_interest *ccn_node::composeInterest(uint64_t chunk)
