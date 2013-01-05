@@ -1,0 +1,6 @@
+	ccn_node[0].face++ <--> { delay = 1ms; } <--> ccn_node[1].face++;
+	ccn_node[0].face++ <--> { delay = 1ms; } <--> ccn_node[2].face++;
+	ccn_node[1].face++ <--> { delay = 1ms; } <--> ccn_node[3].face++;
+	ccn_node[1].face++ <--> { delay = 1ms; } <--> ccn_node[4].face++;
+	ccn_node[2].face++ <--> { delay = 1ms; } <--> ccn_node[5].face++;
+	ccn_node[2].face++ <--> { delay = 1ms; } <--> ccn_node[6].face++;

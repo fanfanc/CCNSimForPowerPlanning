@@ -751,7 +751,6 @@ void ccn_node:: manage_localChunk(uint64_t chunk)
 //Generate interest requests coming from local or global request generator
 void ccn_node::generate_interest(uint32_t name)
 {
-
     uint64_t chunk = generateChunk(name, 0);
     file f = content->getData(name);
 
@@ -769,7 +768,6 @@ void ccn_node::generate_interest(uint32_t name)
             return;
         }
 
-
         if (ContentStore->lookup(chunk))
         {
             stat->cache_hit(P, chunk); //stat->cache_hit(P);
@@ -783,7 +781,6 @@ void ccn_node::generate_interest(uint32_t name)
         }
         else
         {
-
             stat->cache_miss(P, chunk); //stat->cache_miss(P);//Cache miss for the last not completed chunk
             local_cache_miss(chunk);//local stabilize
             PIT[chunk].push_back(-1); //Insert a local dummy interface (-1) within PIT
@@ -820,9 +817,7 @@ int ccn_node::minimum_distance_from_source(uint32_t content_name, uint32_t *who_
     {
         int fibsize = FIB.size();
         int fibwhosize = FIB[who_has[0]].size();
-
         P = FIB[who_has[0]].at(0).size();//Return the single shortest path
-
     }
 
     return P;
