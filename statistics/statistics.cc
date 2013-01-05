@@ -260,7 +260,6 @@ void statistics::nodeStabilize(int node)
 
 void statistics::nodeFinalize(int node)
 {
-
     node_steady--;
     if (node_steady == 0)
     {
@@ -285,7 +284,7 @@ void statistics::recordThroughput()
         }
 
         char name[30];
-        sprintf(name, "peak[%d->%d]", it->first.first, it->first.second);
+        sprintf(name, "throughput[%d->%d]", it->first.first, it->first.second);
         double max = it->second > throughputBetweenEachNode[make_pair(it->first.second, it->first.first)] ?
             it->second : throughputBetweenEachNode[make_pair(it->first.second, it->first.first)];
 
