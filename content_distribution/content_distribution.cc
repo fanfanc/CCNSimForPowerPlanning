@@ -134,7 +134,8 @@ void content_distribution::initialize()
         int new_rep;
         while ( cardinality > 0 )
         {
-            new_rep = intrand(N);
+            //new_rep = intrand(N);
+            new_rep = 0;
             if (find (repositories.begin(), repositories.end(), new_rep) == repositories.end())
             {
                 repositories.push_back(new_rep);
@@ -160,7 +161,6 @@ void content_distribution::initialize()
     {
         catalog[f].repository =
             compose_random_vector(big_rep + f * replicas, replicas, repositories); //initialize that part of memory with a ranodom vector containing the repositories where is possible to find the file
-        cout << catalog[f].repository[0] << endl;
     }
 
     cout << "Content initialized" << endl;

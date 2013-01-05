@@ -117,7 +117,7 @@ static int not_full = 0;
 ofstream ccn_node::node_stat;
 ofstream ccn_node::node_local;
 
-const int peakStabledDuration = 600; // s
+const int peakStabledDuration = 10; // s
 
 int ccn_node::getNodeID()
 {
@@ -335,7 +335,7 @@ void ccn_node::stabilize()
             samples.push_back(hit_rate_global);
             if (samples.size() == 600)  //sample each 60 seconds every 100ms
             {
-                if (variance(samples) <= convergence_threshold && isPeakStabled)
+                if (variance(samples) <= convergence_threshold and isPeakStabled)
                 {
                     phase_ended = true;
                     unstable = unstable - 1;
@@ -408,7 +408,6 @@ void ccn_node::updatePeakStabled()
         }
     }
 
-    cout << "Node[" << getNodeID() << "] peak stabled ." << endl;
     isPeakStabled = true;
 }
 
@@ -418,7 +417,7 @@ void ccn_node::handleMessage(cMessage *in)
 {
     if (in == statisticsPeak)
     {
-        if (!isPeakStabled)
+        if (sim_state != STEADY)
         {
             handleStatisticsPeak();
             scheduleAt(simTime() + 1, statisticsPeak);
