@@ -257,20 +257,13 @@ protected:
 private:
     cMessage *event; // pointer to the event object which we'll use for timing
 
-    cMessage *statisticsPeak;
-    vector<int> peakAtEachNode;
-    vector<int> chunkCountRecvFromEachNodePerSecond;
-    vector<int> peakDuration;
-    bool isPeakStabled;
 
+    vector<unsigned long long> chunkCountRecvFromEachNode;
     int getNodeID();
     int getNodeCount();
-    void initializeStatisticsPeak();
-    void handleStatisticsPeak();
+    void initializeStatisticsThroughput();
     void addChunkCount(const int source);
-    void updatePeakStabled();
-    void updatePeakDuration();
-    void recordPeak();
+    void recordThroughput();
 
     content_distribution *content;
     statistics *stat;

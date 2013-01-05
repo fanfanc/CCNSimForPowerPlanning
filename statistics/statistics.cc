@@ -269,15 +269,15 @@ void statistics::nodeFinalize(int node)
 
 }
 
-void statistics::peak(const int source, const int sink, const int chunk_count)
+void statistics::throughput(const int source, const int sink, const double chunkCountPerSec)
 {
-    peakBetweenEachNodePair[make_pair(source, sink)] = chunk_count;
+    throughputBetweenEachNode[make_pair(source, sink)] = chunkCountPerSec;
 }
 
-void statistics::recordPeak()
+void statistics::recordThroughput()
 {
-    for (map<pair<int, int>, int>::iterator it = peakBetweenEachNodePair.begin();
-        it != peakBetweenEachNodePair.end(); ++it)
+    for (map<pair<int, int>, double>::iterator it = throughputBetweenEachNode.begin();
+        it != throughputBetweenEachNode.end(); ++it)
     {
         if (it->first.first <= it->first.second)
         {
@@ -286,12 +286,12 @@ void statistics::recordPeak()
 
         char name[30];
         sprintf(name, "peak[%d->%d]", it->first.first, it->first.second);
-        int peakCount = it->second > peakBetweenEachNodePair[make_pair(it->first.second, it->first.first)] ?
-            it->second : peakBetweenEachNodePair[make_pair(it->first.second, it->first.first)];
+        double max = it->second > throughputBetweenEachNode[make_pair(it->first.second, it->first.first)] ?
+            it->second : throughputBetweenEachNode[make_pair(it->first.second, it->first.first)];
 
-        if (peakCount)
+        if (max)
         {
-            recordScalar(name, peakCount);
+            recordScalar(name, max);
         }
     }
 }
@@ -311,5 +311,5 @@ void statistics::finish()
         recordScalar(name, it->second / (it->second + miss_level[it->first]));
     }
 
-    recordPeak();
+    recordThroughput();
 }

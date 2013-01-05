@@ -143,6 +143,9 @@ void global_generator::initialize()
 
 void global_generator::activity() //activity utilizzato una sola volta e non come while sempre attivo
 {
+    //in order to disable global request generator
+    return;
+
     if (lambda <= 0)
         return;
 
@@ -162,7 +165,7 @@ void global_generator::activity() //activity utilizzato una sola volta e non com
             clients.push_back(j);
     }
 
-    uint32_t k,i = 0;
+    uint32_t k, i = 0;
     map<uint32_t, uint32_t> dset;
 
     //while ( (true && R == 0) || (i < R && R != 0) ){
@@ -185,7 +188,6 @@ void global_generator::activity() //activity utilizzato una sola volta e non com
         }
         else
         {
-
             //obtain the distance set of the node (nodes located at a distance less than D hops)
             dset = ( (ccn_node *)gate("globPort", catalog[id].polarity)->getNextGate()->getOwnerModule() )->getDistanceSet();
 

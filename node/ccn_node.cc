@@ -133,32 +133,19 @@ int ccn_node::getNodeCount()
     return ccn_topo.getNumNodes();
 }
 
-void ccn_node::initializeStatisticsPeak()
+void ccn_node::initializeStatisticsThroughput()
 {
-    isPeakStabled = false;
-    peakAtEachNode.assign(getNodeCount(), 0);
-    chunkCountRecvFromEachNodePerSecond.assign(getNodeCount(), 0);
-    peakDuration.assign(getNodeCount(), 0);
-    statisticsPeak = new cMessage("statisticsPeak");
-    scheduleAt(simTime() + 1, statisticsPeak);
+    chunkCountRecvFromEachNode.assign(getNodeCount(), 0);
 }
 
 void ccn_node::addChunkCount(const int source)
 {
-    chunkCountRecvFromEachNodePerSecond[source]++;
-}
-
-void ccn_node::updatePeakDuration()
-{
-    for (size_t nodeID = 0; nodeID != peakDuration.size(); ++nodeID)
-    {
-        peakDuration[nodeID]++;
-    }
+    chunkCountRecvFromEachNode[source]++;
 }
 
 void ccn_node::initialize()
 {
-    initializeStatisticsPeak();
+    initializeStatisticsThroughput();
     _interests = 0;
     _data = 0;
 
@@ -335,7 +322,7 @@ void ccn_node::stabilize()
             samples.push_back(hit_rate_global);
             if (samples.size() == 600)  //sample each 60 seconds every 100ms
             {
-                if (variance(samples) <= convergence_threshold and isPeakStabled)
+                if (variance(samples) <= convergence_threshold)
                 {
                     phase_ended = true;
                     unstable = unstable - 1;
@@ -380,57 +367,9 @@ void ccn_node::local_cache_hit(uint64_t chunk)
     }
 }
 
-void ccn_node::handleStatisticsPeak()
-{
-    updatePeakDuration();
-
-    for (size_t nodeID = 0; nodeID != peakAtEachNode.size(); ++nodeID)
-    {
-        if (peakAtEachNode[nodeID] < chunkCountRecvFromEachNodePerSecond[nodeID])
-        {
-            peakAtEachNode[nodeID] = chunkCountRecvFromEachNodePerSecond[nodeID];
-            peakDuration[nodeID] = 0;
-            cout << "Node[" << nodeID << "->" << getNodeID() << "], peak updated: " << peakAtEachNode[nodeID] << endl;
-        }
-    }
-
-    chunkCountRecvFromEachNodePerSecond.assign(getNodeCount(), 0);
-}
-
-void ccn_node::updatePeakStabled()
-{
-    for (int nodeID = 0; nodeID != peakDuration.size(); ++nodeID)
-    {
-        if (peakDuration[nodeID] < peakStabledDuration)
-        {
-            isPeakStabled = false;
-            return;
-        }
-    }
-
-    isPeakStabled = true;
-}
-
-
 //Core function of a ccn_node
 void ccn_node::handleMessage(cMessage *in)
 {
-    if (in == statisticsPeak)
-    {
-        if (sim_state != STEADY)
-        {
-            handleStatisticsPeak();
-            scheduleAt(simTime() + 1, statisticsPeak);
-            updatePeakStabled();
-        }
-        else
-        {
-            delete in;
-        }
-
-        return;
-    }
-
     //only if convergence_type_wc
     if (in == event)
     {
@@ -499,18 +438,18 @@ void ccn_node::handleMessage(cMessage *in)
     }//case
 }
 
-void ccn_node::recordPeak()
+void ccn_node::recordThroughput()
 {
-    for (int source = 0; source != peakAtEachNode.size(); ++source)
+    for (int source = 0; source != chunkCountRecvFromEachNode.size(); ++source)
     {
-        stat->peak(source, getNodeID(), peakAtEachNode[source]);
+        stat->throughput(source, getNodeID(), chunkCountRecvFromEachNode[source] / simTime());
     }
 }
 
 //Per node statistics printing
 void ccn_node::finish()
 {
-    recordPeak();
+    recordThroughput();
 
     char name[10];
     sprintf ( name, "INT[%d]", getIndex() );

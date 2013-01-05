@@ -121,7 +121,7 @@ private:
      *  */
     void activity();
 
-    map<pair<int, int>, int> peakBetweenEachNodePair;
+    map<pair<int, int>, double> throughputBetweenEachNode;
 
 
     double distance;
@@ -153,8 +153,8 @@ private:
     bool convergence_type_avg;
 public:
 
-	void peak(const int source, const int sink, const int chunk_count);
-	void recordPeak();
+	void throughput(const int source, const int sink, const double chunkCountPerSec);
+	void recordThroughput();
 
     //Standard node function
 
