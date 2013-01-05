@@ -1,79 +1,79 @@
 /*
- * ccnSim 
- *	ccnSim is a scalable chunk-level simulator of Content Centric Networks (CCN), 
- * 	that we developed in the context of ANR Connect (http://www.anr-connect.org/)
- * 
- * Contact us:
- * 	Email: ccnsim@lincs.fr 
- *  	Web: http://www.enst.fr/~drossi/ccnSim
- * 
- * People:
- *  	Giuseppe Rossini (lead developer)
- * 	Raffele Chiocchetti (developer)
- * 	Dario Rossi (occasional debugger) 
- * 
- *                                                                                                  
- *                                                    #                                             
- *                            #                     ;##                                             
- *                         `#+##                   +##:                                             
- *                         #` .#                 ### ##                                             
- *                         + `#.                 ;   #+ .                                           
- *                          ##,                    ,+#####                                          
- *                         +#  `                  `++#;                                             
- *                        ;#####`             ;+`                                                   
- *                        +#, `:             +###`                                                  
- *                              `.########; `####+                                                  
- *                      ###+################  +#+                                                   
- *                     `###########;.,,,:;#                                                         
- *                      :##:                                                                        
- *                   `;.                                                                            
- *            ` :####   								    									   
- *       +#####`####    							    `###,   									   
- *       +  #+ ,###.    							    ,###    										  
- *         +#+ ####     							    ;###    	    
- *     +    #+;###      							    ###`    	    
- *     ##;;## ####      							   .###     							 
- *       ###  ###.      							    ###`    								
- *                      		       `.;###:, 			    ###     								
- *           ###:       		      ;########  .##			    ###
- *          #####       		     ##########  :##`			    ###
- *          #####       		     ###;    `;  ```			    ###
- *           +##:          #####` ###`;###  `###,	 ###  ###`###` ;###	    ##;
- *              .        ,######  ########:  #######.	 ##,  #############,	   `###     	 
- *           :#.        `###`  .  ###. `###  #########. .##`  ###` #### `###	   .###     	 
- *          `###        ###	 `##;	##:   ######### ;##  `##:  ###   ##:	   .##+     	   
- *           ###        ###	 .##   `##`	.;##### ###  ,##`  ###  `##`	   .##,     	   
- *         #:###        ###	 ###   ,##	   .### ###  ###   ##;  ,##	   .##.     	   
- *        ## ###`       ###	 ###   ;##  ##`    ;### ##:  ###   ##.  ;##	   .###     	   
- *       ##+ ,##;       #######  ###   ###  ##########:.##`  ###  .##	###		    	   
- *     :#,.#..###;       ######  ##,   ### `#########: ;##   ##,  ;##	###		    	   
- *    +##+#+,,####        `		     `,;##;`	    `			   +##+     	    
- *        #:  :###.     							,#####      	    
- *        +.   ;.       							;#####      	  
- *               ,###   							.#####      	  
- *               +###+  							`####`      	  
- *               #####  								    										
- *               :###                                                                               
- *                 . :#                              ###                                            
- *                  ;##,                            +###;                                           
- *                 `####.                         # ####+                                           
- *                  #####;                     #### ####`                                           
- *                    ######### ,#+,     `,########                                                 
- *                      ######: ####`###########;                                                   
- *                         ###. ####`########+.                                                     
- *                              +###. ##;.`         ;##,                                            
- *                 	   `	 	           #  						  
- *                 	####.	 		  `#:`` 					    
- *                 	+#`	 		   ####+					    
- *                 	#:	 		   #;  ##					    
- *                     +###	 		   +# +#					    
- *                 	 .#+	 		    +##.					    
- *                 	   +	 								    
- *                    .` `#+	 								    
- *                    ####+	 								    
- *                 								      
+ * ccnSim
+ *  ccnSim is a scalable chunk-level simulator of Content Centric Networks (CCN),
+ *  that we developed in the context of ANR Connect (http://www.anr-connect.org/)
  *
- * 
+ * Contact us:
+ *  Email: ccnsim@lincs.fr
+ *      Web: http://www.enst.fr/~drossi/ccnSim
+ *
+ * People:
+ *      Giuseppe Rossini (lead developer)
+ *  Raffele Chiocchetti (developer)
+ *  Dario Rossi (occasional debugger)
+ *
+ *
+ *                                                    #
+ *                            #                     ;##
+ *                         `#+##                   +##:
+ *                         #` .#                 ### ##
+ *                         + `#.                 ;   #+ .
+ *                          ##,                    ,+#####
+ *                         +#  `                  `++#;
+ *                        ;#####`             ;+`
+ *                        +#, `:             +###`
+ *                              `.########; `####+
+ *                      ###+################  +#+
+ *                     `###########;.,,,:;#
+ *                      :##:
+ *                   `;.
+ *            ` :####
+ *       +#####`####                                    `###,
+ *       +  #+ ,###.                                    ,###
+ *         +#+ ####                                     ;###
+ *     +    #+;###                                      ###`
+ *     ##;;## ####                                     .###
+ *       ###  ###.                                      ###`
+ *                                     `.;###:,                 ###
+ *           ###:                     ;########  .##                ###
+ *          #####                    ##########  :##`               ###
+ *          #####                    ###;    `;  ```                ###
+ *           +##:          #####` ###`;###  `###,    ###  ###`###` ;###     ##;
+ *              .        ,######  ########:  #######.    ##,  #############,       `###
+ *           :#.        `###`  .  ###. `###  #########. .##`  ###` #### `###       .###
+ *          `###        ###  `##;   ##:   ######### ;##  `##:  ###   ##:       .##+
+ *           ###        ###  .##   `##` .;##### ###  ,##`  ###  `##`       .##,
+ *         #:###        ###  ###   ,##     .### ###  ###   ##;  ,##    .##.
+ *        ## ###`       ###  ###   ;##  ##`    ;### ##:  ###   ##.  ;##    .###
+ *       ##+ ,##;       #######  ###   ###  ##########:.##`  ###  .##   ###
+ *     :#,.#..###;       ######  ##,   ### `#########: ;##   ##,  ;##   ###
+ *    +##+#+,,####        `          `,;##;`        `              +##+
+ *        #:  :###.                                 ,#####
+ *        +.   ;.                                   ;#####
+ *               ,###                               .#####
+ *               +###+                              `####`
+ *               #####
+ *               :###
+ *                 . :#                              ###
+ *                  ;##,                            +###;
+ *                 `####.                         # ####+
+ *                  #####;                     #### ####`
+ *                    ######### ,#+,     `,########
+ *                      ######: ####`###########;
+ *                         ###. ####`########+.
+ *                              +###. ##;.`         ;##,
+ *                     `                   #
+ *                  ####.             `#:``
+ *                  +#`            ####+
+ *                  #:             #;  ##
+ *                     +###            +# +#
+ *                   .#+                +##.
+ *                     +
+ *                    .` `#+
+ *                    ####+
+ *
+ *
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public License
  * as published by the Free Software Foundation; either version 2
@@ -107,44 +107,51 @@ using namespace __gnu_cxx;
 //
 //Other functions are insterted for utility and statistical purposes
 //
-class Cache{
-    public:
-	Cache(uint32_t s):size(s){;}
+class Cache
+{
+public:
+    Cache(uint32_t s): size(s)
+    {
+        ;
+    }
 
-//behavioural
-	/*! Store chunk in cache
-	*   \param chunkID
-        *   \sa Version 0.0 
+    //behavioural
+    /*! Store chunk in cache
+    *   \param chunkID
+        *   \sa Version 0.0
         *  */
-	virtual void storeData(uint64_t) = 0;
-	/*! Lookup chunk
-	*   \param chunkID
-        *   \sa Version 0.0 
+    virtual void storeData(uint64_t) = 0;
+    /*! Lookup chunk
+    *   \param chunkID
+        *   \sa Version 0.0
         *  */
-	virtual bool lookup(uint64_t) = 0;
+    virtual bool lookup(uint64_t) = 0;
 
-//utility
-	/*! Cache WarmUp
-	*   \param Catalog
-        *   \sa Version 0.0 
+    //utility
+    /*! Cache WarmUp
+    *   \param Catalog
+        *   \sa Version 0.0
         *  */
-	virtual bool warmup(vector<file> &);
-	/*! Check if cache is full
-        *   \sa Version 0.0 
+    virtual bool warmup(vector<file> &);
+    /*! Check if cache is full
+        *   \sa Version 0.0
         *  */
-	virtual bool isFull(){ return deq.size()>=size; }
+    virtual bool isFull()
+    {
+        return deq.size() >= size;
+    }
 
-//statistics
-	/*! Get Cache
-	*   \param chunkID
-        *   \sa Version 0.0 
+    //statistics
+    /*! Get Cache
+    *   \param chunkID
+        *   \sa Version 0.0
         *  */
-	virtual deque<uint64_t> getCache();
+    virtual deque<uint64_t> getCache();
 
-    protected:
-	hash_map <uint64_t, bool> cache;
-	deque <uint64_t> deq;
-	uint32_t size;
+protected:
+    hash_map <uint64_t, bool> cache;
+    deque <uint64_t> deq;
+    uint32_t size;
 };
 
 #endif

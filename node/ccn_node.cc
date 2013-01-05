@@ -117,9 +117,48 @@ static int not_full = 0;
 ofstream ccn_node::node_stat;
 ofstream ccn_node::node_local;
 
+const int peakStabledDuration = 600; // s
 
-void  ccn_node::initialize()
+int ccn_node::getNodeID()
 {
+    return getIndex();
+}
+
+int ccn_node::getNodeCount()
+{
+    vector<string> ccn_types;
+    ccn_types.push_back("modules.ccn_node");
+    cTopology ccn_topo;
+    ccn_topo.extractByNedTypeName(ccn_types);
+    return ccn_topo.getNumNodes();
+}
+
+void ccn_node::initializeStatisticsPeak()
+{
+    isPeakStabled = false;
+    peakAtEachNode.assign(getNodeCount(), 0);
+    chunkCountRecvFromEachNodePerSecond.assign(getNodeCount(), 0);
+    peakDuration.assign(getNodeCount(), 0);
+    statisticsPeak = new cMessage("statisticsPeak");
+    scheduleAt(simTime() + 1, statisticsPeak);
+}
+
+void ccn_node::addChunkCount(const int source)
+{
+    chunkCountRecvFromEachNodePerSecond[source]++;
+}
+
+void ccn_node::updatePeakDuration()
+{
+    for (size_t nodeID = 0; nodeID != peakDuration.size(); ++nodeID)
+    {
+        peakDuration[nodeID]++;
+    }
+}
+
+void ccn_node::initialize()
+{
+    initializeStatisticsPeak();
     _interests = 0;
     _data = 0;
 
@@ -135,8 +174,6 @@ void  ccn_node::initialize()
     time_steady_state = par("sim_time");
     sim_state = INIT; //state of node
     //cout<<ACCESS_DELAY_FIX<<"s +"<<ACCESS_DELAY_RAND<<"s"<<endl;
-
-
 
     content = (content_distribution *)this->getParentModule()->getModuleByRelativePath("content_distribution");
     stat = (statistics *)this->getParentModule()->getModuleByRelativePath("statistics");
@@ -186,12 +223,7 @@ void  ccn_node::initialize()
             if (FIB[n].size() && FIB[n].at(0).size() <= D)//if D=-1 set is not_full
                 dset[n] = FIB[n].at(0).size();
         }
-
-
     }
-
-
-
 
     //Node statistics on a file (rather than on a single chunk)
     //The process is more lightweight and it should not waste cpu resources
@@ -204,7 +236,6 @@ void  ccn_node::initialize()
         node_stat.open((node_stat_file).c_str(), std::ios::app );
     }
 
-    //
     // local distribution, this file contain the local requests for each fileID(Zipf) and the hitrate of each node
     if (!node_local.is_open())
     {
@@ -214,26 +245,16 @@ void  ccn_node::initialize()
         node_local.open(node_local_file.c_str(), std::ios::app );
     }
 
-
     //reverse order because compare of all and closest result true in adaptive_closest and adaptive_all
     if (type_strategy.compare("all") == 0) //AdaptiveClosest solution of paper
         fwd = ALL;
     else if (type_strategy.compare("closest") == 0) //second solution of paper
         fwd = CLOSEST;
 
-
-
-
     //extraction of number of nodes
-
-    vector<string> ccn_types;
-    ccn_types.push_back("modules.ccn_node");
-    cTopology ccn_topo;
-    ccn_topo.extractByNedTypeName(ccn_types);
-    N = ccn_topo.getNumNodes();
+    N = getNodeCount();
     not_full = N;
     unstable = N;
-
 
     string convergence_type = par("convergence_type");
     if (convergence_type.compare("wc") == 0)
@@ -284,15 +305,11 @@ void  ccn_node::initialize()
         phase_ended = true;
         stat->fullStamping(getIndex());
     }
-
-
-
 }
 
 
 void ccn_node::stabilize()
 {
-
     //collect hit rate only if the state is transient
 
     if (sim_state == WARM_UP)
@@ -318,7 +335,7 @@ void ccn_node::stabilize()
             samples.push_back(hit_rate_global);
             if (samples.size() == 600)  //sample each 60 seconds every 100ms
             {
-                if (variance(samples) <= convergence_threshold )
+                if (variance(samples) <= convergence_threshold && isPeakStabled)
                 {
                     phase_ended = true;
                     unstable = unstable - 1;
@@ -340,7 +357,6 @@ void ccn_node::stabilize()
         }
 
     }//sim_state
-
 }
 
 
@@ -353,12 +369,10 @@ void ccn_node::local_cache_miss(uint64_t chunk)
     {
         miss++;
     }
-
-
 }
+
 void ccn_node::local_cache_hit(uint64_t chunk)
 {
-
     uint32_t name =::getName(chunk);
     if (name < zipf_limit or sim_state == STEADY)
     {
@@ -366,11 +380,58 @@ void ccn_node::local_cache_hit(uint64_t chunk)
     }
 }
 
+void ccn_node::handleStatisticsPeak()
+{
+    updatePeakDuration();
+
+    for (size_t nodeID = 0; nodeID != peakAtEachNode.size(); ++nodeID)
+    {
+        if (peakAtEachNode[nodeID] < chunkCountRecvFromEachNodePerSecond[nodeID])
+        {
+            peakAtEachNode[nodeID] = chunkCountRecvFromEachNodePerSecond[nodeID];
+            peakDuration[nodeID] = 0;
+            cout << "Node[" << nodeID << "->" << getNodeID() << "], peak updated: " << peakAtEachNode[nodeID] << endl;
+        }
+    }
+
+    chunkCountRecvFromEachNodePerSecond.assign(getNodeCount(), 0);
+}
+
+void ccn_node::updatePeakStabled()
+{
+    for (int nodeID = 0; nodeID != peakDuration.size(); ++nodeID)
+    {
+        if (peakDuration[nodeID] < peakStabledDuration)
+        {
+            isPeakStabled = false;
+            return;
+        }
+    }
+
+    cout << "Node[" << getNodeID() << "] peak stabled ." << endl;
+    isPeakStabled = true;
+}
 
 
 //Core function of a ccn_node
 void ccn_node::handleMessage(cMessage *in)
 {
+    if (in == statisticsPeak)
+    {
+        if (!isPeakStabled)
+        {
+            handleStatisticsPeak();
+            scheduleAt(simTime() + 1, statisticsPeak);
+            updatePeakStabled();
+        }
+        else
+        {
+            delete in;
+        }
+
+        return;
+    }
+
     //only if convergence_type_wc
     if (in == event)
     {
@@ -386,7 +447,6 @@ void ccn_node::handleMessage(cMessage *in)
         {
             delete in;
             stat->nodeFinalize(this->getIndex());
-
         }
         return;
     }
@@ -398,7 +458,6 @@ void ccn_node::handleMessage(cMessage *in)
     int type = in->getKind();
     switch (type)
     {
-
         //On receiving interest
     case CCN_I:
         _interests++;
@@ -422,6 +481,8 @@ void ccn_node::handleMessage(cMessage *in)
         data_msg->setHops(data_msg -> getHops() + 1);
 
         manage_data(data_msg);
+
+        addChunkCount(data_msg->getSenderModule()->getIndex());
         delete in;
         break;
 
@@ -433,17 +494,24 @@ void ccn_node::handleMessage(cMessage *in)
 
         //
     case CCN_A:
-
         manage_localChunk(((access_data *)in)->getChunk());
         delete in;
 
     }//case
+}
 
+void ccn_node::recordPeak()
+{
+    for (int source = 0; source != peakAtEachNode.size(); ++source)
+    {
+        stat->peak(source, getNodeID(), peakAtEachNode[source]);
+    }
 }
 
 //Per node statistics printing
 void ccn_node::finish()
 {
+    recordPeak();
 
     char name[10];
     sprintf ( name, "INT[%d]", getIndex() );
@@ -478,10 +546,7 @@ void ccn_node::finish()
     {
         node_local.close();
     }
-
 }
-
-
 
 //Manage incoming interests:
 //if an interest for a data file arrives:
@@ -491,7 +556,6 @@ void ccn_node::finish()
 //
 void ccn_node::manage_interest(ccn_interest *int_msg)
 {
-
     uint64_t chunk = int_msg ->getChunk();
     uint32_t name = ::getName(chunk);
     file f = content->getData(name);
@@ -506,12 +570,9 @@ void ccn_node::manage_interest(ccn_interest *int_msg)
         ccn_data *data_msg = composeCData(chunk);
         data_msg->setRepository(int_msg->getRepository());
         send(data_msg, "face$o", int_msg->getArrivalGate()->getIndex());
-
     }
     else if ( P == 0 )  //b) Look locally (only if you own a repository)
     {
-
-
         stat->cache_miss(P, chunk); //stat->cache_miss(P);
         local_cache_miss(chunk);//local stabilize
         ccn_data *data_msg = composeCData(chunk);
@@ -529,10 +590,8 @@ void ccn_node::manage_interest(ccn_interest *int_msg)
             }
         }
 
-
         data_msg->setRepository(int_msg->getRepository());
         send(data_msg, "face$o", int_msg->getArrivalGate()->getIndex());
-
     }
     else   //c) Put the interface within the PIT
     {
@@ -559,7 +618,6 @@ void ccn_node::manage_interest(ccn_interest *int_msg)
 //Manage incoming data
 void ccn_node::manage_data(ccn_data *data_msg)
 {
-
     uint64_t chunk = data_msg ->getChunk();
     uint32_t name = ::getName(chunk);//filename
     file f = content->getData(name);

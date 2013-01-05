@@ -1,79 +1,79 @@
 /*
- * ccnSim 
- *	ccnSim is a scalable chunk-level simulator of Content Centric Networks (CCN), 
- * 	that we developed in the context of ANR Connect (http://www.anr-connect.org/)
- * 
- * Contact us:
- * 	Email: ccnsim@lincs.fr 
- *  	Web: http://www.enst.fr/~drossi/ccnSim
- * 
- * People:
- *  	Giuseppe Rossini (lead developer)
- * 	Raffele Chiocchetti (developer)
- * 	Dario Rossi (occasional debugger) 
- * 
- *                                                                                                  
- *                                                    #                                             
- *                            #                     ;##                                             
- *                         `#+##                   +##:                                             
- *                         #` .#                 ### ##                                             
- *                         + `#.                 ;   #+ .                                           
- *                          ##,                    ,+#####                                          
- *                         +#  `                  `++#;                                             
- *                        ;#####`             ;+`                                                   
- *                        +#, `:             +###`                                                  
- *                              `.########; `####+                                                  
- *                      ###+################  +#+                                                   
- *                     `###########;.,,,:;#                                                         
- *                      :##:                                                                        
- *                   `;.                                                                            
- *            ` :####   								    									   
- *       +#####`####    							    `###,   									   
- *       +  #+ ,###.    							    ,###    										  
- *         +#+ ####     							    ;###    	    
- *     +    #+;###      							    ###`    	    
- *     ##;;## ####      							   .###     							 
- *       ###  ###.      							    ###`    								
- *                      		       `.;###:, 			    ###     								
- *           ###:       		      ;########  .##			    ###
- *          #####       		     ##########  :##`			    ###
- *          #####       		     ###;    `;  ```			    ###
- *           +##:          #####` ###`;###  `###,	 ###  ###`###` ;###	    ##;
- *              .        ,######  ########:  #######.	 ##,  #############,	   `###     	 
- *           :#.        `###`  .  ###. `###  #########. .##`  ###` #### `###	   .###     	 
- *          `###        ###	 `##;	##:   ######### ;##  `##:  ###   ##:	   .##+     	   
- *           ###        ###	 .##   `##`	.;##### ###  ,##`  ###  `##`	   .##,     	   
- *         #:###        ###	 ###   ,##	   .### ###  ###   ##;  ,##	   .##.     	   
- *        ## ###`       ###	 ###   ;##  ##`    ;### ##:  ###   ##.  ;##	   .###     	   
- *       ##+ ,##;       #######  ###   ###  ##########:.##`  ###  .##	###		    	   
- *     :#,.#..###;       ######  ##,   ### `#########: ;##   ##,  ;##	###		    	   
- *    +##+#+,,####        `		     `,;##;`	    `			   +##+     	    
- *        #:  :###.     							,#####      	    
- *        +.   ;.       							;#####      	  
- *               ,###   							.#####      	  
- *               +###+  							`####`      	  
- *               #####  								    										
- *               :###                                                                               
- *                 . :#                              ###                                            
- *                  ;##,                            +###;                                           
- *                 `####.                         # ####+                                           
- *                  #####;                     #### ####`                                           
- *                    ######### ,#+,     `,########                                                 
- *                      ######: ####`###########;                                                   
- *                         ###. ####`########+.                                                     
- *                              +###. ##;.`         ;##,                                            
- *                 	   `	 	           #  						  
- *                 	####.	 		  `#:`` 					    
- *                 	+#`	 		   ####+					    
- *                 	#:	 		   #;  ##					    
- *                     +###	 		   +# +#					    
- *                 	 .#+	 		    +##.					    
- *                 	   +	 								    
- *                    .` `#+	 								    
- *                    ####+	 								    
- *                 								      
+ * ccnSim
+ *  ccnSim is a scalable chunk-level simulator of Content Centric Networks (CCN),
+ *  that we developed in the context of ANR Connect (http://www.anr-connect.org/)
  *
- * 
+ * Contact us:
+ *  Email: ccnsim@lincs.fr
+ *      Web: http://www.enst.fr/~drossi/ccnSim
+ *
+ * People:
+ *      Giuseppe Rossini (lead developer)
+ *  Raffele Chiocchetti (developer)
+ *  Dario Rossi (occasional debugger)
+ *
+ *
+ *                                                    #
+ *                            #                     ;##
+ *                         `#+##                   +##:
+ *                         #` .#                 ### ##
+ *                         + `#.                 ;   #+ .
+ *                          ##,                    ,+#####
+ *                         +#  `                  `++#;
+ *                        ;#####`             ;+`
+ *                        +#, `:             +###`
+ *                              `.########; `####+
+ *                      ###+################  +#+
+ *                     `###########;.,,,:;#
+ *                      :##:
+ *                   `;.
+ *            ` :####
+ *       +#####`####                                    `###,
+ *       +  #+ ,###.                                    ,###
+ *         +#+ ####                                     ;###
+ *     +    #+;###                                      ###`
+ *     ##;;## ####                                     .###
+ *       ###  ###.                                      ###`
+ *                                     `.;###:,                 ###
+ *           ###:                     ;########  .##                ###
+ *          #####                    ##########  :##`               ###
+ *          #####                    ###;    `;  ```                ###
+ *           +##:          #####` ###`;###  `###,    ###  ###`###` ;###     ##;
+ *              .        ,######  ########:  #######.    ##,  #############,       `###
+ *           :#.        `###`  .  ###. `###  #########. .##`  ###` #### `###       .###
+ *          `###        ###  `##;   ##:   ######### ;##  `##:  ###   ##:       .##+
+ *           ###        ###  .##   `##` .;##### ###  ,##`  ###  `##`       .##,
+ *         #:###        ###  ###   ,##     .### ###  ###   ##;  ,##    .##.
+ *        ## ###`       ###  ###   ;##  ##`    ;### ##:  ###   ##.  ;##    .###
+ *       ##+ ,##;       #######  ###   ###  ##########:.##`  ###  .##   ###
+ *     :#,.#..###;       ######  ##,   ### `#########: ;##   ##,  ;##   ###
+ *    +##+#+,,####        `          `,;##;`        `              +##+
+ *        #:  :###.                                 ,#####
+ *        +.   ;.                                   ;#####
+ *               ,###                               .#####
+ *               +###+                              `####`
+ *               #####
+ *               :###
+ *                 . :#                              ###
+ *                  ;##,                            +###;
+ *                 `####.                         # ####+
+ *                  #####;                     #### ####`
+ *                    ######### ,#+,     `,########
+ *                      ######: ####`###########;
+ *                         ###. ####`########+.
+ *                              +###. ##;.`         ;##,
+ *                     `                   #
+ *                  ####.             `#:``
+ *                  +#`            ####+
+ *                  #:             #;  ##
+ *                     +###            +# +#
+ *                   .#+                +##.
+ *                     +
+ *                    .` `#+
+ *                    ####+
+ *
+ *
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public License
  * as published by the Free Software Foundation; either version 2
@@ -95,13 +95,14 @@
 
 Register_Class(statistics);
 
-void statistics::initialize(){
+void statistics::initialize()
+{
     vector<string> ccn_types;
     ccn_types.push_back("modules.ccn_node");
     cTopology ccn_topo;
     ccn_topo.extractByNedTypeName(ccn_types);
     N = ccn_topo.getNumNodes();
-    
+
 
     div_size = 0;
     tot_size = 0;
@@ -110,50 +111,55 @@ void statistics::initialize(){
 
     div_cache.clear();
     hit_time.setName("cache_hit");
-    node_unstable=N;
-    node_steady=N;
+    node_unstable = N;
+    node_steady = N;
 
     convergence_threshold = par("convergence_threshold_avg");
-    string convergence_type=par("convergence_type");
-    if(convergence_type.compare("wc")==0)
-	convergence_type_avg=false;
+    string convergence_type = par("convergence_type");
+    if (convergence_type.compare("wc") == 0)
+        convergence_type_avg = false;
     else
-	convergence_type_avg=true;
-	
-    //cout<<endl<<"convergence type avg "<<convergence_type_avg; 
+        convergence_type_avg = true;
+
+    //cout<<endl<<"convergence type avg "<<convergence_type_avg;
 
 
 
 }
 
-void statistics::activity(){
+void statistics::activity()
+{
     double hit_rate_global;
-    if(convergence_type_avg ){
-	//cout<<endl<<"Statistics start stabilization phase"<<endl;
-	while ( true ){
-	
-	if (enable_stat){
-	    
-	    hit_rate_global = hit/(hit+miss);
+    if (convergence_type_avg )
+    {
+        //cout<<endl<<"Statistics start stabilization phase"<<endl;
+        while ( true )
+        {
 
-	    hit_time.record(hit_rate_global);
+            if (enable_stat)
+            {
 
-	    if (checkStabilization(hit_rate_global)) //in this case stabilization is checked from each node
-		break;
-	}
-	wait(0.1);
-    }
-	hit=0;
-	
-	miss=0;
-	cout<<"STEADY PHASE"<<endl;
-	wait(_sim_time);
-    	endSimulation();
+                hit_rate_global = hit / (hit + miss);
+
+                hit_time.record(hit_rate_global);
+
+                if (checkStabilization(hit_rate_global)) //in this case stabilization is checked from each node
+                    break;
+            }
+            wait(0.1);
+        }
+        hit = 0;
+
+        miss = 0;
+        cout << "STEADY PHASE" << endl;
+        wait(_sim_time);
+        endSimulation();
     }
 
 }
 
-bool statistics::checkStabilization(double hit_rate_global){
+bool statistics::checkStabilization(double hit_rate_global)
+{
     bool end = false;
 
     static double last;
@@ -161,109 +167,149 @@ bool statistics::checkStabilization(double hit_rate_global){
 
     samples.push_back(hit_rate_global);
 
-    if (samples.size() == 60/0.1){ //sample each 60 seconds every 100ms
-	if (variance(samples) <= convergence_threshold) // || ( simTime() - ft ) >= _sim_time )
-	    end = true;
-	samples.clear();
+    if (samples.size() == 60 / 0.1) //sample each 60 seconds every 100ms
+    {
+        if (variance(samples) <= convergence_threshold) // || ( simTime() - ft ) >= _sim_time )
+            end = true;
+        samples.clear();
     }
 
     return end;
 
 }
 
-void statistics::inspectCache(Cache *c, int owner){
+void statistics::inspectCache(Cache *c, int owner)
+{
     //if (!enable_stat)
-	//return;
+    //return;
 
     deque<uint64_t> chunks = c->getCache();
 
-    uint32_t size =chunks.size();
-    for (int i = 0; i < size;i++){
+    uint32_t size = chunks.size();
+    for (int i = 0; i < size; i++)
+    {
         div_cache[chunks[i]] = true;
     }
     tot_size += size;
 
 }
 
-void statistics::cache_hit(int P,uint64_t chunk){
+void statistics::cache_hit(int P, uint64_t chunk)
+{
     if (!enable_stat)
-	return;
+        return;
     hit++;
     hit_level[P]++;
-    uint32_t name=::getName(chunk);
+    uint32_t name =::getName(chunk);
     hit_stat[name]++;
 }
 
-void statistics::cache_miss(int P, uint64_t chunk){
+void statistics::cache_miss(int P, uint64_t chunk)
+{
     if (!enable_stat)
-	return;
+        return;
     miss++;
     miss_level[P]++;
-    uint32_t name=::getName(chunk);
+    uint32_t name =::getName(chunk);
     miss_stat[name]++;
 
 }
 
-void statistics::stretch(int s,int d){
+void statistics::stretch(int s, int d)
+{
     if (!enable_stat)
-	return;
-    this->shortest+=s;
-    this->distance+=d;
+        return;
+    this->shortest += s;
+    this->distance += d;
 }
 
-void statistics::fullStamping(int node){
+void statistics::fullStamping(int node)
+{
 
-    if (full_time.find(node)==full_time.end()){
-	full_time[node]=simTime();
-	if ( (int)full_time.size()==N && !enable_stat){
-	    ft = simTime();
-	    recordScalar("full_time",ft);
-	    hit=0;
-	    miss=0;
-	    cout<<endl<<"Transient Phase"<<endl;
-	    enable_stat=true;
-	}
+    if (full_time.find(node) == full_time.end())
+    {
+        full_time[node] = simTime();
+        if ( (int)full_time.size() == N && !enable_stat)
+        {
+            ft = simTime();
+            recordScalar("full_time", ft);
+            hit = 0;
+            miss = 0;
+            cout << endl << "Transient Phase" << endl;
+            enable_stat = true;
+        }
     }
 
 }
 
 
-void statistics::nodeStabilize(int node){
+void statistics::nodeStabilize(int node)
+{
 
-node_unstable--;
-if(node_unstable==0){
-	
-	cout<<"Steady State Phase"<<endl;
-	hit=0;
-	miss=0;
- 	recordScalar("transient_time",simTime());
- 	}
-	
+    node_unstable--;
+    if (node_unstable == 0)
+    {
+
+        cout << "Steady State Phase" << endl;
+        hit = 0;
+        miss = 0;
+        recordScalar("transient_time", simTime());
+    }
+
 }
 
-void statistics::nodeFinalize(int node){
+void statistics::nodeFinalize(int node)
+{
 
     node_steady--;
-    if(node_steady==0){
-	        endSimulation();
-		        }
+    if (node_steady == 0)
+    {
+        endSimulation();
+    }
 
 }
 
+void statistics::peak(const int source, const int sink, const int chunk_count)
+{
+    peakBetweenEachNodePair[make_pair(source, sink)] = chunk_count;
+}
 
-	
-void statistics::finish(){
-   
-    recordScalar("div_ratio", div_cache.size()/tot_size);
-    recordScalar("cache_hit", ( hit/(hit+miss)) );
-    cout<<endl<<"Global Hit rate: "<<hit/(hit+miss)<<endl;
-    recordScalar("stretch", distance/shortest );
+void statistics::recordPeak()
+{
+    for (map<pair<int, int>, int>::iterator it = peakBetweenEachNodePair.begin();
+        it != peakBetweenEachNodePair.end(); ++it)
+    {
+        if (it->first.first <= it->first.second)
+        {
+            continue;
+        }
 
-    for (map<int,double>::iterator it= hit_level.begin(); it != hit_level.end();it++){
+        char name[30];
+        sprintf(name, "peak[%d->%d]", it->first.first, it->first.second);
+        int peakCount = it->second > peakBetweenEachNodePair[make_pair(it->first.second, it->first.first)] ?
+            it->second : peakBetweenEachNodePair[make_pair(it->first.second, it->first.first)];
 
-	char name[10];
-	sprintf ( name, "hl[%d]", it->first );
-	recordScalar(name,it->second/(it->second+miss_level[it->first]));
-
+        if (peakCount)
+        {
+            recordScalar(name, peakCount);
+        }
     }
+}
+
+void statistics::finish()
+{
+    recordScalar("div_ratio", div_cache.size() / tot_size);
+    recordScalar("cache_hit", ( hit / (hit + miss)) );
+    cout << endl << "Global Hit rate: " << hit / (hit + miss) << endl;
+    recordScalar("stretch", distance / shortest );
+
+    for (map<int, double>::iterator it = hit_level.begin(); it != hit_level.end(); it++)
+    {
+
+        char name[10];
+        sprintf ( name, "hl[%d]", it->first );
+        recordScalar(name, it->second / (it->second + miss_level[it->first]));
+    }
+
+    recordPeak();
 }
