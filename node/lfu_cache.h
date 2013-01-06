@@ -14,6 +14,11 @@ public:
     virtual void storeData(uint64_t);
 
     virtual bool lookup(uint64_t);
+
+private:
+	hash_map<uint64_t, uint64_t> lfuCache;
+	multimap<uint64_t, uint64_t> refCountToChunk;
+	void remove(const uint64_t count, const uint64_t chunk);
 };
 
 #endif
