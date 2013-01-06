@@ -10,9 +10,9 @@ class LFU_Cache: public Cache
 {
 public:
     LFU_Cache(uint32_t s);
-
+    
+    virtual bool warmup(vector<file> &catalog);
     virtual void storeData(uint64_t);
-
     virtual bool lookup(uint64_t);
 
 private:

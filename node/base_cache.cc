@@ -115,17 +115,6 @@ bool Cache::warmup(vector<file> &catalog)
         cache[chunk] = true;
         deq.push_back(chunk);
 
-        //For each i-th content store each chunk with a 0.5 probability
-        //for (uint32_t j=0; j<file.size && s < size; j++){
-
-        //    double x = dblrand ();
-        //    if ( x < 0.5 ){
-        //  cache[chunk] = true;
-        //  deq.push_back(chunk++);
-        //  s++;
-        //    }
-
-        //}
         i++;
         s++;
     }
