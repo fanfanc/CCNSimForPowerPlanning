@@ -14,9 +14,11 @@ public:
     virtual bool warmup(vector<file> &catalog);
     virtual void storeData(uint64_t);
     virtual bool lookup(uint64_t);
+    virtual bool isFull();
+    virtual deque<uint64_t> getCache();
 
 private:
-	hash_map<uint64_t, uint64_t> lfuCache;
+	map<uint64_t, uint64_t> lfuCache;
 	multimap<uint64_t, uint64_t> refCountToChunk;
 	void remove(const uint64_t count, const uint64_t chunk);
 };

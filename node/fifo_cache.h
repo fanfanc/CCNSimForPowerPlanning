@@ -126,7 +126,6 @@ void FIFO_Cache::storeData(uint64_t chunk){
        deq.pop_front();
        cache.erase(toErase);
    }
-
 }
 
 
