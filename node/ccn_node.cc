@@ -96,6 +96,7 @@
 #include "statistics/stat_util.h"
 
 #include "lru_cache.h"
+#include "lfu_cache.h"
 #include "random_cache.h"
 #include "fifo_cache.h"
 #include "two_cache.h"
@@ -177,6 +178,8 @@ void ccn_node::initialize()
         ContentStore = new FIFO_Cache(S);
     else if (cache_replacement_policy.compare("two") == 0)
         ContentStore = new TWO_Cache(S);
+    else if (cache_replacement_policy.compare("lfu") == 0)
+        ContentStore = new LFU_Cache(S);
     else
         ContentStore = new LRU_Cache(S);
 

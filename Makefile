@@ -1,12 +1,12 @@
 #
-# OMNeT++/OMNEST Makefile for ccnSim-0.1
+# OMNeT++/OMNEST Makefile for ccnSim_modified_for_my_research
 #
 # This file was generated with the command:
 #  opp_makemake -f --deep -X patch
 #
 
 # Name of target to be created (-o option)
-TARGET = ccnSim-0.1$(EXE_SUFFIX)
+TARGET = ccnSim$(EXE_SUFFIX)
 
 # User interface (uncomment one) (-u option)
 USERIF_LIBS = $(ALL_ENV_LIBS) # that is, $(TKENV_LIBS) $(CMDENV_LIBS)
@@ -45,6 +45,7 @@ OBJS = \
     $O/node/base_cache.o \
     $O/node/ccn_node.o \
     $O/node/global_request_generator.o \
+    $O/node/lfu_cache.o \
     $O/node/lru_cache.o \
     $O/node/repository.o \
     $O/node/request_generator.o \
@@ -129,7 +130,7 @@ msgheaders: $(MSGFILES:.msg=_m.h)
 
 clean:
 	-rm -rf $O
-	-rm -f ccnSim-0.1 ccnSim-0.1.exe libccnSim-0.1.so libccnSim-0.1.a libccnSim-0.1.dll libccnSim-0.1.dylib
+	-rm -f ccnSim_modified_for_my_research ccnSim_modified_for_my_research.exe libccnSim_modified_for_my_research.so libccnSim_modified_for_my_research.a libccnSim_modified_for_my_research.dll libccnSim_modified_for_my_research.dylib
 	-rm -f ./*_m.cc ./*_m.h
 	-rm -f content_distribution/*_m.cc content_distribution/*_m.h
 	-rm -f howto/*_m.cc howto/*_m.h
@@ -152,6 +153,14 @@ depend:
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 $O/content_distribution/content_distribution.o: content_distribution/content_distribution.cc \
   content_distribution/content_distribution.h
+$O/messages/access_data_m.o: messages/access_data_m.cc \
+  messages/access_data_m.h
+$O/messages/ccn_data_m.o: messages/ccn_data_m.cc \
+  messages/ccn_data_m.h
+$O/messages/ccn_interest_m.o: messages/ccn_interest_m.cc \
+  messages/ccn_interest_m.h
+$O/messages/local_m.o: messages/local_m.cc \
+  messages/local_m.h
 $O/node/base_cache.o: node/base_cache.cc \
   ./utils/ccn_utils.h \
   ./content_distribution/content_distribution.h \
@@ -186,6 +195,7 @@ $O/node/ccn_node.o: node/ccn_node.cc \
   statistics/statistics.h \
   ./utils/ccn_utils.h \
   ./content_distribution/content_distribution.h \
+  node/lfu_cache.h \
   node/lru_cache.h
 $O/node/global_request_generator.o: node/global_request_generator.cc \
   ./node/repository.h \
@@ -206,6 +216,10 @@ $O/node/global_request_generator.o: node/global_request_generator.cc \
   ./utils/ccn_utils.h \
   ./content_distribution/content_distribution.h \
   node/lru_cache.h
+$O/node/lfu_cache.o: node/lfu_cache.cc \
+  node/base_cache.h \
+  ./content_distribution/content_distribution.h \
+  node/lfu_cache.h
 $O/node/lru_cache.o: node/lru_cache.cc \
   node/lru.hpp \
   node/base_cache.h \
