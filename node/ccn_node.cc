@@ -169,6 +169,19 @@ void ccn_node::initialize()
 
     Replicas = content->getNumberReplicas();//Replicas of file
 
+    ifstream fin("cacheSize");
+    if (fin)
+    {
+        string line;
+        for (int i = 0; i <= getNodeID(); ++i)
+        {
+            getline(fin, line);
+        }
+        istringstream buf(line);
+        buf >> S;
+        cout << "NodeID: " << getNodeID() << " CacheSize: " << S << endl;
+    }
+
 
     //Choose cache type (lru, random, power of two, fifo)
     string cache_replacement_policy = par("cache_replacement_policy");
@@ -505,7 +518,6 @@ void ccn_node::manage_interest(ccn_interest *int_msg)
 
     if (ContentStore->lookup(chunk)) //a) Check in your cache
     {
-
         stat->cache_hit(P, chunk); //stat->cache_hit(P);
         local_cache_hit(chunk);
         ccn_data *data_msg = composeCData(chunk);
@@ -520,7 +532,6 @@ void ccn_node::manage_interest(ccn_interest *int_msg)
 
         if (decision_policy->isDataToCache( data_msg )) //Decide if message contains data to cache
         {
-
             ContentStore->storeData(chunk);
             if ( !phase_ended and ContentStore->isFull() and sim_state == WARM_UP)
             {
