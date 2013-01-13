@@ -264,6 +264,7 @@ private:
     void initializeStatisticsThroughput();
     void addChunkCount(const int source);
     void recordThroughput();
+    uint32_t readCacheSize();
 
     content_distribution *content;
     statistics *stat;

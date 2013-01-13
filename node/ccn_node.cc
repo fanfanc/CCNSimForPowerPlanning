@@ -144,6 +144,25 @@ void ccn_node::addChunkCount(const int source)
     chunkCountRecvFromEachNode[source]++;
 }
 
+uint32_t ccn_node::readCacheSize()
+{
+    uint32_t cacheSize = 0;
+    ifstream fin("cacheSize");
+    if (fin)
+    {
+        string line;
+        for (int i = 0; i <= getNodeID(); ++i)
+        {
+            getline(fin, line);
+        }
+        istringstream buf(line);
+        buf >> cacheSize;
+        cout << "NodeID: " << getNodeID() << " CacheSize: " << cacheSize << endl;
+    }
+
+    return cacheSize;
+}
+
 void ccn_node::initialize()
 {
     initializeStatisticsThroughput();
@@ -169,19 +188,7 @@ void ccn_node::initialize()
 
     Replicas = content->getNumberReplicas();//Replicas of file
 
-    ifstream fin("cacheSize");
-    if (fin)
-    {
-        string line;
-        for (int i = 0; i <= getNodeID(); ++i)
-        {
-            getline(fin, line);
-        }
-        istringstream buf(line);
-        buf >> S;
-        cout << "NodeID: " << getNodeID() << " CacheSize: " << S << endl;
-    }
-
+    S = readCacheSize();
 
     //Choose cache type (lru, random, power of two, fifo)
     string cache_replacement_policy = par("cache_replacement_policy");
