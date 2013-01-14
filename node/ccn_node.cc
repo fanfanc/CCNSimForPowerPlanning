@@ -118,8 +118,6 @@ static int not_full = 0;
 ofstream ccn_node::node_stat;
 ofstream ccn_node::node_local;
 
-const int peakStabledDuration = 10; // s
-
 int ccn_node::getNodeID()
 {
     return getIndex();
