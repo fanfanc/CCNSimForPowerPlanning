@@ -283,8 +283,8 @@ LRUCacheH4<K, V>::LRUCacheH4(int maxsize)
       _lru(NULL),
       _maxsize(maxsize)
 {
-    if (_maxsize <= 0)
-        throw "LRUCacheH4: expecting cache size > 0";
+    if (_maxsize <= 1)
+        throw "LRUCacheH4: expecting cache size > 1";
 }
 
 
