@@ -122,6 +122,7 @@ private:
     void activity();
 
     map<pair<int, int>, double> throughputBetweenEachNode;
+    map<int, int> cacheSizeInEachNode;
 
 
     double distance;
@@ -153,8 +154,10 @@ private:
     bool convergence_type_avg;
 public:
 
+    void cacheSize(const int nodeID, const int size);
+
 	void throughput(const int source, const int sink, const double chunkCountPerSec);
-	void recordThroughput();
+
 
     //Standard node function
 
@@ -227,6 +230,12 @@ protected:
 
 private:
     void recordSimTime();
+    void recordThroughput();
+    void recordTransportPower();
+    void recordStoragePower();
+    double getStoragePower();
+    double getTransportPower();
+    void recordTotalPower();
 };
 
 #endif

@@ -201,6 +201,8 @@ void ccn_node::initialize()
     else
         ContentStore = new LRU_Cache(S);
 
+    stat->cacheSize(getNodeID(), S);
+
 
     //and the decision policy (distance, always, never, fixed probability p)
     string dec_policy = par("decision_policy");

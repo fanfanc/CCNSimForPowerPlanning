@@ -93,6 +93,9 @@
 #include "statistics.h"
 #include "statistics/stat_util.h"
 
+const double powerPerChunkForStorage = 0.2 * 0.01; // W
+const double powerPerChunkForTransport = 1.76156 * 0.01; //W s
+
 Register_Class(statistics);
 
 void statistics::initialize()
@@ -102,7 +105,6 @@ void statistics::initialize()
     cTopology ccn_topo;
     ccn_topo.extractByNedTypeName(ccn_types);
     N = ccn_topo.getNumNodes();
-
 
     div_size = 0;
     tot_size = 0;
@@ -120,11 +122,6 @@ void statistics::initialize()
         convergence_type_avg = false;
     else
         convergence_type_avg = true;
-
-    //cout<<endl<<"convergence type avg "<<convergence_type_avg;
-
-
-
 }
 
 void statistics::activity()
@@ -155,7 +152,6 @@ void statistics::activity()
         wait(_sim_time);
         endSimulation();
     }
-
 }
 
 bool statistics::checkStabilization(double hit_rate_global)
@@ -175,14 +171,10 @@ bool statistics::checkStabilization(double hit_rate_global)
     }
 
     return end;
-
 }
 
 void statistics::inspectCache(Cache *c, int owner)
 {
-    //if (!enable_stat)
-    //return;
-
     deque<uint64_t> chunks = c->getCache();
 
     uint32_t size = chunks.size();
@@ -191,7 +183,6 @@ void statistics::inspectCache(Cache *c, int owner)
         div_cache[chunks[i]] = true;
     }
     tot_size += size;
-
 }
 
 void statistics::cache_hit(int P, uint64_t chunk)
@@ -212,7 +203,6 @@ void statistics::cache_miss(int P, uint64_t chunk)
     miss_level[P]++;
     uint32_t name =::getName(chunk);
     miss_stat[name]++;
-
 }
 
 void statistics::stretch(int s, int d)
@@ -225,7 +215,6 @@ void statistics::stretch(int s, int d)
 
 void statistics::fullStamping(int node)
 {
-
     if (full_time.find(node) == full_time.end())
     {
         full_time[node] = simTime();
@@ -239,13 +228,11 @@ void statistics::fullStamping(int node)
             enable_stat = true;
         }
     }
-
 }
 
 
 void statistics::nodeStabilize(int node)
 {
-
     node_unstable--;
     if (node_unstable == 0)
     {
@@ -255,7 +242,6 @@ void statistics::nodeStabilize(int node)
         miss = 0;
         recordScalar("transient_time", simTime());
     }
-
 }
 
 void statistics::nodeFinalize(int node)
@@ -265,7 +251,6 @@ void statistics::nodeFinalize(int node)
     {
         endSimulation();
     }
-
 }
 
 void statistics::throughput(const int source, const int sink, const double chunkCountPerSec)
@@ -273,10 +258,15 @@ void statistics::throughput(const int source, const int sink, const double chunk
     throughputBetweenEachNode[make_pair(source, sink)] = chunkCountPerSec;
 }
 
+void statistics::cacheSize(const int nodeID, const int size)
+{
+    cacheSizeInEachNode[nodeID] = size;
+}
+
 void statistics::recordThroughput()
 {
     for (map<pair<int, int>, double>::iterator it = throughputBetweenEachNode.begin();
-        it != throughputBetweenEachNode.end(); ++it)
+            it != throughputBetweenEachNode.end(); ++it)
     {
         if (it->first.first <= it->first.second)
         {
@@ -286,13 +276,69 @@ void statistics::recordThroughput()
         char name[30];
         sprintf(name, "throughput[%d->%d]", it->first.first, it->first.second);
         double max = it->second > throughputBetweenEachNode[make_pair(it->first.second, it->first.first)] ?
-            it->second : throughputBetweenEachNode[make_pair(it->first.second, it->first.first)];
+                     it->second : throughputBetweenEachNode[make_pair(it->first.second, it->first.first)];
 
         if (max)
         {
             recordScalar(name, max);
         }
     }
+}
+
+void statistics::recordTransportPower()
+{   
+    char name[30];
+    sprintf(name, "Transport Power : ");
+    recordScalar(name, getTransportPower());
+}
+
+void statistics::recordStoragePower()
+{
+    char name[30];
+    sprintf(name, "Storage Power : ");
+    recordScalar(name, getStoragePower());
+}
+
+double statistics::getStoragePower()
+{
+    double total = 0;
+    for (map<int, int>::iterator it = cacheSizeInEachNode.begin(); 
+        it != cacheSizeInEachNode.end(); ++it)
+    {
+        if (0 == it->first)
+        {
+            continue;
+        }
+
+        total += it->second;
+    }
+
+    return total * powerPerChunkForStorage;
+}
+
+double statistics::getTransportPower()
+{
+    double total = 0;
+    for (map<pair<int, int>, double>::iterator it = throughputBetweenEachNode.begin();
+            it != throughputBetweenEachNode.end(); ++it)
+    {
+        if (it->first.first <= it->first.second)
+        {
+            continue;
+        }
+
+        total += it->second > throughputBetweenEachNode[make_pair(it->first.second, it->first.first)] ?
+                 it->second : throughputBetweenEachNode[make_pair(it->first.second, it->first.first)];
+    }
+
+    return total * powerPerChunkForTransport;
+}
+
+void statistics::recordTotalPower()
+{
+    char name[30];
+    sprintf(name, "Total Power : ");
+    recordScalar(name, getTransportPower() + getStoragePower());
 }
 
 void statistics::recordSimTime()
@@ -318,5 +364,8 @@ void statistics::finish()
     }
 
     recordThroughput();
+    recordTransportPower();
+    recordStoragePower();
+    recordTotalPower();
     recordSimTime();
 }
