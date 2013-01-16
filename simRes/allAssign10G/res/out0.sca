@@ -1,0 +1,48 @@
+version 2
+run General-0-20130116-16:34:50-3601
+attr configname General
+attr datetime 20130116-16:34:50
+attr experiment General
+attr inifile youtube.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network topologies.hierarchy_tree_network
+attr processid 3601
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+scalar hierarchy_tree_network.statistics 	full_time 	2.825072766679
+scalar hierarchy_tree_network.statistics 	transient_time 	182.9
+scalar hierarchy_tree_network.ccn_node[0] 	INT[0] 	28913097
+scalar hierarchy_tree_network.ccn_node[0] 	DATA[0] 	0
+scalar hierarchy_tree_network.ccn_node[1] 	INT[1] 	14743419
+scalar hierarchy_tree_network.ccn_node[1] 	DATA[1] 	14427312
+scalar hierarchy_tree_network.ccn_node[2] 	INT[2] 	14795175
+scalar hierarchy_tree_network.ccn_node[2] 	DATA[2] 	14485640
+scalar hierarchy_tree_network.ccn_node[3] 	INT[3] 	0
+scalar hierarchy_tree_network.ccn_node[3] 	DATA[3] 	7415171
+scalar hierarchy_tree_network.ccn_node[4] 	INT[4] 	0
+scalar hierarchy_tree_network.ccn_node[4] 	DATA[4] 	7328015
+scalar hierarchy_tree_network.ccn_node[5] 	INT[5] 	0
+scalar hierarchy_tree_network.ccn_node[5] 	DATA[5] 	7375976
+scalar hierarchy_tree_network.ccn_node[6] 	INT[6] 	0
+scalar hierarchy_tree_network.ccn_node[6] 	DATA[6] 	7418951
+scalar hierarchy_tree_network.statistics 	div_ratio 	0.60792630691231
+scalar hierarchy_tree_network.statistics 	cache_hit 	0.0471186997209
+scalar hierarchy_tree_network.statistics 	stretch 	0.85019128312533
+scalar hierarchy_tree_network.statistics 	hl[1] 	0.017571612100856
+scalar hierarchy_tree_network.statistics 	hl[2] 	0.1422726237642
+scalar hierarchy_tree_network.statistics 	throughput[1->0] 	78875.762600896
+scalar hierarchy_tree_network.statistics 	throughput[2->0] 	79194.648439158
+scalar hierarchy_tree_network.statistics 	throughput[3->1] 	40539.586822622
+scalar hierarchy_tree_network.statistics 	throughput[4->1] 	40063.095015607
+scalar hierarchy_tree_network.statistics 	throughput[5->2] 	40325.303280743
+scalar hierarchy_tree_network.statistics 	throughput[6->2] 	40560.252514376
+scalar hierarchy_tree_network.statistics 	"Transport Power : " 	5629.2173315712
+scalar hierarchy_tree_network.statistics 	"Storage Power : " 	1200
+scalar hierarchy_tree_network.statistics 	"Total Power : " 	6829.2173315712
+scalar hierarchy_tree_network.statistics 	"Total Simulation Time : " 	182.91185434239
