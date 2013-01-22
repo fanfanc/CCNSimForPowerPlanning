@@ -94,7 +94,7 @@
 #include "statistics/stat_util.h"
 #include <fstream>
 
-const double powerPerMForStorage = 0.5e-4 /** 0.01*/; // W
+const double powerPerMForStorage = 0.5e-4; // W
 
 
 Register_Class(statistics);
@@ -311,7 +311,7 @@ double statistics::getStoragePower()
             continue;
         }
 
-        total += powerPerMForStorage * pow(it->second * 10, alphaForStorage);
+        total += powerPerMForStorage * pow(it->second, alphaForStorage);
     }
 
     return total;
@@ -330,7 +330,7 @@ double statistics::getTransportPower()
 
         double max = it->second > throughputBetweenEachNode[make_pair(it->first.second, it->first.first)] ?
                  it->second : throughputBetweenEachNode[make_pair(it->first.second, it->first.first)];
-        total += 2 * pow(max * 10 * 8, alphaForTransport);
+        total += 2 * pow(max * 8, alphaForTransport);
     }
 
     return total;

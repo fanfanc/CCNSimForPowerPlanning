@@ -8,14 +8,15 @@ File.open('LRUZipf0.88Results.log', 'r') do |file|
 			alpha.puts(factor[0] + " " + factor[1])
 		end
 
-		for scene in 0..2 do
-			File.open('cacheSize', 'w') do |cache|
-				cache.puts 2
-				cache_size[index * 3 + scene][0].split(', ').each { |size| cache.puts [size.to_i, 2].max.to_s }
-			end
-
-			puts "start simulation... "
-			puts `./ccnSim -u Cmdenv youtube.ini`
+		puts cache_size[index * 3 + 2][0]
+		next if cache_size[index * 3 + 2][0] == "99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999"
+		File.open('cacheSize', 'w') do |cache|
+			cache.puts 2
+			cache_size[index * 3 + 2][0].split(', ').each { |size| cache.puts ([size.to_i, 2].max * 10).to_s }
 		end
+
+		puts "start simulation... "
+		`./ccnSim -u Cmdenv youtube.ini`
+
 	end
 end
