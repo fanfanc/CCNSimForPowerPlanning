@@ -94,7 +94,7 @@
 #include "statistics/stat_util.h"
 #include <fstream>
 
-const double powerPerChunkForStorage = 0.5e-3 * 0.01; // W
+const double powerPerMForStorage = 0.5e-4 /** 0.01*/; // W
 
 
 Register_Class(statistics);
@@ -136,10 +136,8 @@ void statistics::activity()
         //cout<<endl<<"Statistics start stabilization phase"<<endl;
         while ( true )
         {
-
             if (enable_stat)
             {
-
                 hit_rate_global = hit / (hit + miss);
 
                 hit_time.record(hit_rate_global);
@@ -308,12 +306,12 @@ double statistics::getStoragePower()
     for (map<int, int>::iterator it = cacheSizeInEachNode.begin(); 
         it != cacheSizeInEachNode.end(); ++it)
     {
-        if (it->first <= 2)
+        if (it->second <= 2)
         {
             continue;
         }
 
-        total += alphaForStorage * pow(it->second, alphaForStorage);
+        total += powerPerMForStorage * pow(it->second * 10, alphaForStorage);
     }
 
     return total;
@@ -332,7 +330,7 @@ double statistics::getTransportPower()
 
         double max = it->second > throughputBetweenEachNode[make_pair(it->first.second, it->first.first)] ?
                  it->second : throughputBetweenEachNode[make_pair(it->first.second, it->first.first)];
-        total += 2 * pow(max * 0.1 * 8, alphaForTransport);
+        total += 2 * pow(max * 10 * 8, alphaForTransport);
     }
 
     return total;
