@@ -92,15 +92,18 @@
  */
 #include "statistics.h"
 #include "statistics/stat_util.h"
+#include <fstream>
 
 const double powerPerChunkForStorage = 0.5e-3 * 0.01; // W
-const double alphaForStorage = 1;
-const double alphaForTransport = 1;
+
 
 Register_Class(statistics);
 
 void statistics::initialize()
 {
+    ifstream fin("factor");
+    fin >> alphaForStorage >> alphaForTransport;
+
     vector<string> ccn_types;
     ccn_types.push_back("modules.ccn_node");
     cTopology ccn_topo;
@@ -237,7 +240,6 @@ void statistics::nodeStabilize(int node)
     node_unstable--;
     if (node_unstable == 0)
     {
-
         cout << "Steady State Phase" << endl;
         hit = 0;
         miss = 0;
@@ -341,6 +343,9 @@ void statistics::recordTotalPower()
     char name[30];
     sprintf(name, "Total Power : ");
     recordScalar(name, getTransportPower() + getStoragePower());
+    ofstream fout("final_results", ios::app);
+    fout << "alphaForStorage = " << alphaForStorage << " alphaForTransport = " << alphaForTransport;
+    fout << " total power = " << getTransportPower() + getStoragePower() << endl;
 }
 
 void statistics::recordSimTime()

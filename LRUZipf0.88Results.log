@@ -1,0 +1,627 @@
+i = 0 hitRate = 0
+i = 1000 hitRate = 0.193742
+i = 2000 hitRate = 0.237099
+i = 3000 hitRate = 0.264793
+i = 4000 hitRate = 0.285582
+i = 5000 hitRate = 0.302414
+i = 6000 hitRate = 0.316625
+i = 7000 hitRate = 0.328985
+i = 8000 hitRate = 0.339963
+i = 9000 hitRate = 0.349854
+i = 10000 hitRate = 0.358871
+i = 11000 hitRate = 0.367178
+i = 12000 hitRate = 0.37488
+i = 13000 hitRate = 0.382068
+i = 14000 hitRate = 0.388818
+i = 15000 hitRate = 0.395181
+i = 16000 hitRate = 0.401205
+i = 17000 hitRate = 0.406925
+i = 18000 hitRate = 0.412379
+i = 19000 hitRate = 0.417585
+i = 20000 hitRate = 0.422577
+i = 21000 hitRate = 0.427366
+i = 22000 hitRate = 0.43197
+i = 23000 hitRate = 0.436409
+i = 24000 hitRate = 0.440692
+i = 25000 hitRate = 0.444836
+i = 26000 hitRate = 0.448842
+i = 27000 hitRate = 0.452726
+i = 28000 hitRate = 0.456495
+i = 29000 hitRate = 0.460153
+i = 30000 hitRate = 0.463713
+i = 31000 hitRate = 0.467178
+i = 32000 hitRate = 0.470553
+i = 33000 hitRate = 0.473842
+i = 34000 hitRate = 0.477053
+i = 35000 hitRate = 0.480187
+i = 36000 hitRate = 0.48325
+i = 37000 hitRate = 0.486244
+i = 38000 hitRate = 0.489175
+i = 39000 hitRate = 0.492044
+i = 40000 hitRate = 0.494852
+i = 41000 hitRate = 0.497607
+i = 42000 hitRate = 0.500304
+i = 43000 hitRate = 0.502953
+i = 44000 hitRate = 0.505552
+i = 45000 hitRate = 0.508103
+i = 46000 hitRate = 0.51061
+i = 47000 hitRate = 0.513072
+i = 48000 hitRate = 0.515493
+i = 49000 hitRate = 0.517874
+i = 50000 hitRate = 0.520217
+i = 51000 hitRate = 0.522521
+i = 52000 hitRate = 0.52479
+i = 53000 hitRate = 0.527024
+i = 54000 hitRate = 0.529223
+i = 55000 hitRate = 0.531392
+i = 56000 hitRate = 0.533528
+i = 57000 hitRate = 0.535633
+i = 58000 hitRate = 0.537711
+i = 59000 hitRate = 0.539757
+i = 60000 hitRate = 0.541778
+i = 61000 hitRate = 0.543772
+i = 62000 hitRate = 0.545739
+i = 63000 hitRate = 0.547682
+i = 64000 hitRate = 0.549599
+i = 65000 hitRate = 0.551494
+i = 66000 hitRate = 0.553365
+i = 67000 hitRate = 0.555212
+i = 68000 hitRate = 0.557039
+i = 69000 hitRate = 0.558844
+i = 70000 hitRate = 0.560629
+i = 71000 hitRate = 0.562393
+i = 72000 hitRate = 0.564137
+i = 73000 hitRate = 0.565863
+i = 74000 hitRate = 0.567569
+i = 75000 hitRate = 0.569258
+i = 76000 hitRate = 0.570927
+i = 77000 hitRate = 0.57258
+i = 78000 hitRate = 0.574215
+i = 79000 hitRate = 0.575836
+i = 80000 hitRate = 0.577438
+i = 81000 hitRate = 0.579025
+i = 82000 hitRate = 0.580597
+i = 83000 hitRate = 0.582154
+i = 84000 hitRate = 0.583695
+i = 85000 hitRate = 0.585223
+i = 86000 hitRate = 0.586736
+i = 87000 hitRate = 0.588234
+i = 88000 hitRate = 0.58972
+i = 89000 hitRate = 0.591191
+i = 90000 hitRate = 0.592651
+i = 91000 hitRate = 0.594096
+i = 92000 hitRate = 0.59553
+i = 93000 hitRate = 0.596951
+i = 94000 hitRate = 0.598361
+i = 95000 hitRate = 0.599758
+i = 96000 hitRate = 0.601144
+i = 97000 hitRate = 0.602519
+i = 98000 hitRate = 0.603881
+i = 99000 hitRate = 0.605234
+i = 100000 hitRate = 0.606575
+
+
+
+alpha4Storage = 1 alpha4Transport = 0.4
+
+cache size:
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+storage cost = 0
+transport cost = 1721.05
+total cost = 1721.05
+
+cache size:
+ [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
+storage cost = 7
+transport cost = 1457.63
+total cost = 1464.63
+
+cache size:
+ [15979, 15979, 18973, 18973, 18973, 18973, 19415, 19415, 19415, 19415, 19415, 19415, 19415, 19415]
+storage cost = 131.585
+transport cost = 1160.81
+total cost = 1292.4
+
+
+alpha4Storage = 1 alpha4Transport = 0.5
+
+cache size:
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+storage cost = 0
+transport cost = 5542.56
+total cost = 5542.56
+
+cache size:
+ [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
+storage cost = 7
+transport cost = 4503.28
+total cost = 4510.28
+
+cache size:
+ [56006, 56006, 86868, 86868, 86868, 86868, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999]
+storage cost = 629.738
+transport cost = 2542.15
+total cost = 3171.88
+
+
+alpha4Storage = 1 alpha4Transport = 0.6
+
+cache size:
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+storage cost = 0
+transport cost = 17849.6
+total cost = 17849.6
+
+cache size:
+ [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
+storage cost = 7
+transport cost = 13912.7
+total cost = 13919.7
+
+cache size:
+ [99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999]
+storage cost = 699.993
+transport cost = 6857.59
+total cost = 7557.58
+
+
+alpha4Storage = 1 alpha4Transport = 0.7
+
+cache size:
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+storage cost = 0
+transport cost = 57484
+total cost = 57484
+
+cache size:
+ [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
+storage cost = 7
+transport cost = 42982.6
+total cost = 42989.6
+
+cache size:
+ [99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999]
+storage cost = 699.993
+transport cost = 18829.8
+total cost = 19529.8
+
+
+alpha4Storage = 1 alpha4Transport = 0.8
+
+cache size:
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+storage cost = 0
+transport cost = 185125
+total cost = 185125
+
+cache size:
+ [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
+storage cost = 7
+transport cost = 132793
+total cost = 132800
+
+cache size:
+ [99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999]
+storage cost = 699.993
+transport cost = 51703.7
+total cost = 52403.7
+
+
+alpha4Storage = 1.1 alpha4Transport = 0.4
+
+cache size:
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+storage cost = 0
+transport cost = 1721.05
+total cost = 1721.05
+
+cache size:
+ [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
+storage cost = 13.9668
+transport cost = 1457.63
+total cost = 1471.6
+
+cache size:
+ [5328, 5328, 5879, 5879, 5879, 5879, 5672, 5672, 5672, 5672, 5672, 5672, 5672, 5672]
+storage cost = 94.4215
+transport cost = 1299.17
+total cost = 1393.59
+
+
+alpha4Storage = 1.1 alpha4Transport = 0.5
+
+cache size:
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+storage cost = 0
+transport cost = 5542.56
+total cost = 5542.56
+
+cache size:
+ [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
+storage cost = 13.9668
+transport cost = 4503.28
+total cost = 4517.24
+
+cache size:
+ [19258, 19258, 23743, 23743, 23743, 23743, 24731, 24731, 24731, 24731, 24731, 24731, 24731, 24731]
+storage cost = 453.739
+transport cost = 3277.67
+total cost = 3731.41
+
+
+alpha4Storage = 1.1 alpha4Transport = 0.6
+
+cache size:
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+storage cost = 0
+transport cost = 17849.6
+total cost = 17849.6
+
+cache size:
+ [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
+storage cost = 13.9668
+transport cost = 13912.7
+total cost = 13926.6
+
+cache size:
+ [52574, 52574, 80198, 80198, 80198, 80198, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999]
+storage cost = 1916.94
+transport cost = 7052.8
+total cost = 8969.74
+
+
+alpha4Storage = 1.1 alpha4Transport = 0.7
+
+cache size:
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+storage cost = 0
+transport cost = 57484
+total cost = 57484
+
+cache size:
+ [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
+storage cost = 13.9668
+transport cost = 42982.6
+total cost = 42996.5
+
+cache size:
+ [99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999]
+storage cost = 2213.57
+transport cost = 18829.8
+total cost = 21043.4
+
+
+alpha4Storage = 1.1 alpha4Transport = 0.8
+
+cache size:
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+storage cost = 0
+transport cost = 185125
+total cost = 185125
+
+cache size:
+ [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
+storage cost = 13.9668
+transport cost = 132793
+total cost = 132807
+
+cache size:
+ [99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999]
+storage cost = 2213.57
+transport cost = 51703.7
+total cost = 53917.3
+
+
+alpha4Storage = 1.2 alpha4Transport = 0.4
+
+cache size:
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+storage cost = 0
+transport cost = 1721.05
+total cost = 1721.05
+
+cache size:
+ [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
+storage cost = 27.8675
+transport cost = 1457.63
+total cost = 1485.5
+
+cache size:
+ [2188, 2188, 2322, 2322, 2322, 2322, 2203, 2203, 2203, 2203, 2203, 2203, 2203, 2203]
+storage cost = 73.1526
+transport cost = 1389.48
+total cost = 1462.63
+
+
+alpha4Storage = 1.2 alpha4Transport = 0.5
+
+cache size:
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+storage cost = 0
+transport cost = 5542.56
+total cost = 5542.56
+
+cache size:
+ [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
+storage cost = 27.8675
+transport cost = 4503.28
+total cost = 4531.15
+
+cache size:
+ [7407, 7407, 8374, 8374, 8374, 8374, 8183, 8183, 8183, 8183, 8183, 8183, 8183, 8183]
+storage cost = 344.406
+transport cost = 3756.22
+total cost = 4100.63
+
+
+alpha4Storage = 1.2 alpha4Transport = 0.6
+
+cache size:
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+storage cost = 0
+transport cost = 17849.6
+total cost = 17849.6
+
+cache size:
+ [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
+storage cost = 27.8675
+transport cost = 13912.7
+total cost = 13940.5
+
+cache size:
+ [21544, 21544, 27101, 27101, 27101, 27101, 28702, 28702, 28702, 28702, 28702, 28702, 28702, 28702]
+storage cost = 1470.39
+transport cost = 9263.16
+total cost = 10733.5
+
+
+alpha4Storage = 1.2 alpha4Transport = 0.7
+
+cache size:
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+storage cost = 0
+transport cost = 57484
+total cost = 57484
+
+cache size:
+ [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
+storage cost = 27.8675
+transport cost = 42982.6
+total cost = 43010.4
+
+cache size:
+ [49835, 49835, 74885, 74885, 74885, 74885, 96400, 96400, 96400, 96400, 96400, 96400, 96400, 96400]
+storage cost = 5674.91
+transport cost = 19756.3
+total cost = 25431.2
+
+
+alpha4Storage = 1.2 alpha4Transport = 0.8
+
+cache size:
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+storage cost = 0
+transport cost = 185125
+total cost = 185125
+
+cache size:
+ [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
+storage cost = 27.8675
+transport cost = 132793
+total cost = 132821
+
+cache size:
+ [99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999]
+storage cost = 6999.92
+transport cost = 51703.7
+total cost = 58703.6
+
+
+alpha4Storage = 1.3 alpha4Transport = 0.4
+
+cache size:
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+storage cost = 0
+transport cost = 1721.05
+total cost = 1721.05
+
+cache size:
+ [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
+storage cost = 55.603
+transport cost = 1457.63
+total cost = 1513.23
+
+cache size:
+ [1046, 1046, 1104, 1104, 1104, 1104, 1019, 1019, 1019, 1019, 1019, 1019, 1019, 1019]
+storage cost = 59.0488
+transport cost = 1453.72
+total cost = 1512.77
+
+
+alpha4Storage = 1.3 alpha4Transport = 0.5
+
+cache size:
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+storage cost = 0
+transport cost = 5542.56
+total cost = 5542.56
+
+cache size:
+ [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
+storage cost = 55.603
+transport cost = 4503.28
+total cost = 4558.88
+
+cache size:
+ [3283, 3283, 3587, 3587, 3587, 3587, 3408, 3408, 3408, 3408, 3408, 3408, 3408, 3408]
+storage cost = 277.273
+transport cost = 4089.1
+total cost = 4366.38
+
+
+alpha4Storage = 1.3 alpha4Transport = 0.6
+
+cache size:
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+storage cost = 0
+transport cost = 17849.6
+total cost = 17849.6
+
+cache size:
+ [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
+storage cost = 55.603
+transport cost = 13912.7
+total cost = 13968.3
+
+cache size:
+ [9334, 9334, 10761, 10761, 10761, 10761, 10607, 10607, 10607, 10607, 10607, 10607, 10607, 10607]
+storage cost = 1178.03
+transport cost = 10812
+total cost = 11990
+
+
+alpha4Storage = 1.3 alpha4Transport = 0.7
+
+cache size:
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+storage cost = 0
+transport cost = 57484
+total cost = 57484
+
+cache size:
+ [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
+storage cost = 55.603
+transport cost = 42982.6
+total cost = 43038.2
+
+cache size:
+ [23044, 23044, 29465, 29465, 29465, 29465, 31603, 31603, 31603, 31603, 31603, 31603, 31603, 31603]
+storage cost = 4590.25
+transport cost = 26218.1
+total cost = 30808.3
+
+
+alpha4Storage = 1.3 alpha4Transport = 0.8
+
+cache size:
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+storage cost = 0
+transport cost = 185125
+total cost = 185125
+
+cache size:
+ [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
+storage cost = 55.603
+transport cost = 132793
+total cost = 132848
+
+cache size:
+ [47402, 47402, 71009, 71009, 71009, 71009, 90098, 90098, 90098, 90098, 90098, 90098, 90098, 90098]
+storage cost = 16296.5
+transport cost = 55931.6
+total cost = 72228
+
+
+alpha4Storage = 1.4 alpha4Transport = 0.4
+
+cache size:
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+storage cost = 0
+transport cost = 1721.05
+total cost = 1721.05
+
+cache size:
+ [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
+storage cost = 110.943
+transport cost = 1457.63
+total cost = 1568.57
+
+cache size:
+ [571, 571, 584, 584, 584, 584, 545, 545, 545, 545, 545, 545, 545, 545]
+storage cost = 49.2636
+transport cost = 1501.53
+total cost = 1550.79
+
+
+alpha4Storage = 1.4 alpha4Transport = 0.5
+
+cache size:
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+storage cost = 0
+transport cost = 5542.56
+total cost = 5542.56
+
+cache size:
+ [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
+storage cost = 110.943
+transport cost = 4503.28
+total cost = 4614.22
+
+cache size:
+ [1660, 1660, 1753, 1753, 1753, 1753, 1653, 1653, 1653, 1653, 1653, 1653, 1653, 1653]
+storage cost = 229.904
+transport cost = 4337.1
+total cost = 4567
+
+
+alpha4Storage = 1.4 alpha4Transport = 0.6
+
+cache size:
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+storage cost = 0
+transport cost = 17849.6
+total cost = 17849.6
+
+cache size:
+ [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
+storage cost = 110.943
+transport cost = 13912.7
+total cost = 14023.6
+
+cache size:
+ [4385, 4385, 4928, 4928, 4928, 4928, 4701, 4701, 4701, 4701, 4701, 4701, 4701, 4701]
+storage cost = 974.688
+transport cost = 11964.7
+total cost = 12939.4
+
+
+alpha4Storage = 1.4 alpha4Transport = 0.7
+
+cache size:
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+storage cost = 0
+transport cost = 57484
+total cost = 57484
+
+cache size:
+ [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
+storage cost = 110.943
+transport cost = 42982.6
+total cost = 43093.5
+
+cache size:
+ [10931, 10931, 12894, 12894, 12894, 12894, 12877, 12877, 12877, 12877, 12877, 12877, 12877, 12877]
+storage cost = 3856.28
+transport cost = 31042.3
+total cost = 34898.6
+
+
+alpha4Storage = 1.4 alpha4Transport = 0.8
+
+cache size:
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+storage cost = 0
+transport cost = 185125
+total cost = 185125
+
+cache size:
+ [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
+storage cost = 110.943
+transport cost = 132793
+total cost = 132904
+
+cache size:
+ [24052, 24052, 31185, 31185, 31185, 31185, 33733, 33733, 33733, 33733, 33733, 33733, 33733, 33733]
+storage cost = 14010.1
+transport cost = 74303.1
+total cost = 88313.2

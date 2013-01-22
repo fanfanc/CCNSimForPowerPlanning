@@ -152,11 +152,14 @@ private:
     int node_steady;
     double convergence_threshold;
     bool convergence_type_avg;
+
+    double alphaForStorage;
+    double alphaForTransport;
 public:
 
     void cacheSize(const int nodeID, const int size);
 
-	void throughput(const int source, const int sink, const double chunkCountPerSec);
+    void throughput(const int source, const int sink, const double chunkCountPerSec);
 
 
     //Standard node function
