@@ -93,8 +93,9 @@
 #include "statistics.h"
 #include "statistics/stat_util.h"
 
-const double powerPerChunkForStorage = 0.2 * 0.01; // W
-const double powerPerChunkForTransport = 1.76156 * 0.01; //W s
+const double powerPerChunkForStorage = 0.5e-3 * 0.01; // W
+const double alphaForStorage = 1;
+const double alphaForTransport = 1;
 
 Register_Class(statistics);
 
@@ -305,15 +306,15 @@ double statistics::getStoragePower()
     for (map<int, int>::iterator it = cacheSizeInEachNode.begin(); 
         it != cacheSizeInEachNode.end(); ++it)
     {
-        if (0 == it->first)
+        if (it->first <= 2)
         {
             continue;
         }
 
-        total += it->second;
+        total += alphaForStorage * pow(it->second, alphaForStorage);
     }
 
-    return total * powerPerChunkForStorage;
+    return total;
 }
 
 double statistics::getTransportPower()
@@ -327,11 +328,12 @@ double statistics::getTransportPower()
             continue;
         }
 
-        total += it->second > throughputBetweenEachNode[make_pair(it->first.second, it->first.first)] ?
+        double max = it->second > throughputBetweenEachNode[make_pair(it->first.second, it->first.first)] ?
                  it->second : throughputBetweenEachNode[make_pair(it->first.second, it->first.first)];
+        total += 2 * pow(max * 0.1 * 8, alphaForTransport);
     }
 
-    return total * powerPerChunkForTransport;
+    return total;
 }
 
 void statistics::recordTotalPower()

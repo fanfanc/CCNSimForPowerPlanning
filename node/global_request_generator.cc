@@ -218,6 +218,8 @@ void global_generator::activity() //activity utilizzato una sola volta e non com
         }
 
         send(global_req, "globPort", k);
+        cerr << "shouldn't run here." << endl;
+        getchar();
         wait (exponential(1 / lambda));
         i++; //number of requests generated
     }
