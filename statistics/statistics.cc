@@ -342,8 +342,14 @@ void statistics::recordTotalPower()
     sprintf(name, "Total Power : ");
     recordScalar(name, getTransportPower() + getStoragePower());
     ofstream fout("final_results", ios::app);
-    fout << "alphaForStorage = " << alphaForStorage << " alphaForTransport = " << alphaForTransport;
-    fout << " total power = " << getTransportPower() + getStoragePower() << endl;
+    for (alphaForStorage = 1; alphaForStorage <= 1.4 + 0.000001; alphaForStorage += 0.1)
+    {
+        for (alphaForTransport = 0.4; alphaForTransport <= 0.8 + 0.000001; alphaForTransport += 0.1)
+        {
+            fout << "alphaForStorage = " << alphaForStorage << " alphaForTransport = " << alphaForTransport;
+            fout << " total power = " << getTransportPower() + getStoragePower() << endl;
+        }
+    }
 }
 
 void statistics::recordSimTime()
