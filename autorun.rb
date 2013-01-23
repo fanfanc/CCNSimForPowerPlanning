@@ -1,5 +1,5 @@
 `make`
-File.open('LRUZipf0.88Results.log', 'r') do |file|
+File.open('LRUZipf1.2Results.log', 'r') do |file|
 	content = file.read;
 	factors = content.scan(/alpha4Storage = (.*) alpha4Transport = (.*)\r\n/)
 	cache_size = content.scan(/^ \[(.*)\]/)
@@ -9,7 +9,7 @@ File.open('LRUZipf0.88Results.log', 'r') do |file|
 		end
 
 		puts cache_size[index * 3 + 2][0]
-		next if cache_size[index * 3 + 2][0] == "99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999"
+
 		File.open('cacheSize', 'w') do |cache|
 			cache.puts 2
 			cache_size[index * 3 + 2][0].split(', ').each { |size| cache.puts ([size.to_i, 2].max * 10).to_s }

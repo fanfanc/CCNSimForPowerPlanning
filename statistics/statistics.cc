@@ -287,7 +287,7 @@ void statistics::recordThroughput()
 }
 
 void statistics::recordTransportPower()
-{   
+{
     char name[30];
     sprintf(name, "Transport Power : ");
     recordScalar(name, getTransportPower());
@@ -303,8 +303,8 @@ void statistics::recordStoragePower()
 double statistics::getStoragePower()
 {
     double total = 0;
-    for (map<int, int>::iterator it = cacheSizeInEachNode.begin(); 
-        it != cacheSizeInEachNode.end(); ++it)
+    for (map<int, int>::iterator it = cacheSizeInEachNode.begin();
+            it != cacheSizeInEachNode.end(); ++it)
     {
         if (it->second <= 2)
         {
@@ -329,7 +329,7 @@ double statistics::getTransportPower()
         }
 
         double max = it->second > throughputBetweenEachNode[make_pair(it->first.second, it->first.first)] ?
-                 it->second : throughputBetweenEachNode[make_pair(it->first.second, it->first.first)];
+                     it->second : throughputBetweenEachNode[make_pair(it->first.second, it->first.first)];
         total += 2 * pow(max * 8, alphaForTransport);
     }
 
@@ -342,14 +342,9 @@ void statistics::recordTotalPower()
     sprintf(name, "Total Power : ");
     recordScalar(name, getTransportPower() + getStoragePower());
     ofstream fout("final_results", ios::app);
-    for (alphaForStorage = 1; alphaForStorage <= 1.4 + 0.000001; alphaForStorage += 0.1)
-    {
-        for (alphaForTransport = 0.4; alphaForTransport <= 0.8 + 0.000001; alphaForTransport += 0.1)
-        {
-            fout << "alphaForStorage = " << alphaForStorage << " alphaForTransport = " << alphaForTransport;
-            fout << " total power = " << getTransportPower() + getStoragePower() << endl;
-        }
-    }
+
+    fout << "alphaForStorage = " << alphaForStorage << " alphaForTransport = " << alphaForTransport;
+    fout << " total power = " << getTransportPower() + getStoragePower() << endl;
 }
 
 void statistics::recordSimTime()
