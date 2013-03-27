@@ -17,7 +17,7 @@ File.open('LRUZipf1.2Results.log', 'r') do |file|
 
 		puts "start simulation... "
 		start = Time.now
-		`./ccnSim -u Cmdenv youtube.ini`
+		`./CCNSimForPowerPlanning -u Cmdenv youtube.ini`
 		puts Time.now - start
 
 	end

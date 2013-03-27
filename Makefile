@@ -1,12 +1,12 @@
 #
-# OMNeT++/OMNEST Makefile for ccnSim_modified_for_my_research
+# OMNeT++/OMNEST Makefile for CCNSimForPowerPlanning
 #
 # This file was generated with the command:
 #  opp_makemake -f --deep -X patch
 #
 
 # Name of target to be created (-o option)
-TARGET = ccnSim$(EXE_SUFFIX)
+TARGET = CCNSimForPowerPlanning$(EXE_SUFFIX)
 
 # User interface (uncomment one) (-u option)
 USERIF_LIBS = $(ALL_ENV_LIBS) # that is, $(TKENV_LIBS) $(CMDENV_LIBS)
@@ -22,8 +22,12 @@ INCLUDE_PATH = \
     -Imodules \
     -Inode \
     -Ioptimal \
-    -Iresults \
     -Irouting \
+    -IsimRes \
+    -IsimRes/allAssign10G \
+    -IsimRes/allAssign10G/res \
+    -IsimRes/optimalCache \
+    -IsimRes/optimalCache/res \
     -Istatistics \
     -Itopologies \
     -Iutils
@@ -130,7 +134,7 @@ msgheaders: $(MSGFILES:.msg=_m.h)
 
 clean:
 	-rm -rf $O
-	-rm -f ccnSim_modified_for_my_research ccnSim_modified_for_my_research.exe libccnSim_modified_for_my_research.so libccnSim_modified_for_my_research.a libccnSim_modified_for_my_research.dll libccnSim_modified_for_my_research.dylib
+	-rm -f CCNSimForPowerPlanning CCNSimForPowerPlanning.exe libCCNSimForPowerPlanning.so libCCNSimForPowerPlanning.a libCCNSimForPowerPlanning.dll libCCNSimForPowerPlanning.dylib
 	-rm -f ./*_m.cc ./*_m.h
 	-rm -f content_distribution/*_m.cc content_distribution/*_m.h
 	-rm -f howto/*_m.cc howto/*_m.h
@@ -138,8 +142,12 @@ clean:
 	-rm -f modules/*_m.cc modules/*_m.h
 	-rm -f node/*_m.cc node/*_m.h
 	-rm -f optimal/*_m.cc optimal/*_m.h
-	-rm -f results/*_m.cc results/*_m.h
 	-rm -f routing/*_m.cc routing/*_m.h
+	-rm -f simRes/*_m.cc simRes/*_m.h
+	-rm -f simRes/allAssign10G/*_m.cc simRes/allAssign10G/*_m.h
+	-rm -f simRes/allAssign10G/res/*_m.cc simRes/allAssign10G/res/*_m.h
+	-rm -f simRes/optimalCache/*_m.cc simRes/optimalCache/*_m.h
+	-rm -f simRes/optimalCache/res/*_m.cc simRes/optimalCache/res/*_m.h
 	-rm -f statistics/*_m.cc statistics/*_m.h
 	-rm -f topologies/*_m.cc topologies/*_m.h
 	-rm -f utils/*_m.cc utils/*_m.h
@@ -148,7 +156,7 @@ cleanall: clean
 	-rm -rf $(PROJECT_OUTPUT_DIR)
 
 depend:
-	$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc content_distribution/*.cc howto/*.cc messages/*.cc modules/*.cc node/*.cc optimal/*.cc results/*.cc routing/*.cc statistics/*.cc topologies/*.cc utils/*.cc
+	$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc content_distribution/*.cc howto/*.cc messages/*.cc modules/*.cc node/*.cc optimal/*.cc routing/*.cc simRes/*.cc simRes/allAssign10G/*.cc simRes/allAssign10G/res/*.cc simRes/optimalCache/*.cc simRes/optimalCache/res/*.cc statistics/*.cc topologies/*.cc utils/*.cc
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 $O/content_distribution/content_distribution.o: content_distribution/content_distribution.cc \
@@ -218,6 +226,7 @@ $O/node/global_request_generator.o: node/global_request_generator.cc \
   node/lru_cache.h
 $O/node/lfu_cache.o: node/lfu_cache.cc \
   node/base_cache.h \
+  ./utils/ccn_utils.h \
   ./content_distribution/content_distribution.h \
   node/lfu_cache.h
 $O/node/lru_cache.o: node/lru_cache.cc \
